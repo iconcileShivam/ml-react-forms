@@ -1,5 +1,5 @@
 import { CircularProgress, InputBaseComponentProps, TextField } from '@mui/material';
-import Autocomplete, { AutocompleteProps, RenderInputParams, RenderOptionState } from '@mui/lab/Autocomplete';
+import Autocomplete, { AutocompleteProps, AutocompleteRenderInputParams, AutocompleteRenderOptionState } from '@mui/material/Autocomplete';
 import { FormikValues } from 'formik';
 import { filter, findIndex, get, isString, reduce } from 'lodash';
 import * as React from 'react';
@@ -23,9 +23,9 @@ export interface TQueries<T> {
     order: number,
     options?: T[]
 }
-export interface IMUIAutoCompleteProps<T> extends Partial<AutocompleteProps<T>> {
+export interface IMUIAutoCompleteProps<T> extends Partial<AutocompleteProps<T, boolean, boolean, boolean>> {
     options?: T[]
-    renderInputProps?: RenderInputParams
+    renderInputProps?: AutocompleteRenderInputParams
     inputProps?: InputBaseComponentProps
     highlighterProps?: IHighlighterProps
     getQueryResponse?: (newTerm: string) => Promise<Array<T>>
@@ -38,7 +38,7 @@ export interface IProps<T> extends IFieldProps {
     fieldProps?: IMUIAutoCompleteProps<T>
 }
 
-export const MUIAutocomplete = <T extends Record<string, any> | string>(props: IProps<T>) => {
+export function MUIAutocomplete<T>(props: IProps<T>) {
     const [query, setQuery] = React.useState<string>();
     const ref = React.useRef<HTMLDivElement | null>(null);
     const { fieldProps = {} as IMUIAutoCompleteProps<T>, formikProps = {} as FormikValues, fieldConfig = {} as FormConfig } = props
@@ -50,7 +50,7 @@ export const MUIAutocomplete = <T extends Record<string, any> | string>(props: I
             highlightColor: '#ffff00'
         } as IHighlighterProps,
         options = [],
-        renderInputProps = {} as RenderInputParams,
+        renderInputProps = {} as AutocompleteRenderInputParams,
         inputProps = {} as InputBaseComponentProps,
         getQueryResponse = undefined,
         clearOnSelect = false,
@@ -165,6 +165,7 @@ export const MUIAutocomplete = <T extends Record<string, any> | string>(props: I
             event.preventDefault();
             if (reason === 'clear') {
                 if (onItemSelected) {
+                    // @ts-ignore
                     onItemSelected((multiple ? [] : (isString(value) ? values : null)) as T);
                 } else {
                     formikProps.setFieldValue(get(fieldConfig, 'valueKey'), multiple ? [] : (isString(value) ? values : null), false)
@@ -176,7 +177,7 @@ export const MUIAutocomplete = <T extends Record<string, any> | string>(props: I
         }
     }
 
-    const defaultRenderOptions = (option: T, { inputValue }: RenderOptionState) => {
+    const defaultRenderOptions = (option: T, { inputValue = '' }: AutocompleteRenderOptionState) => {
         /*THIS WILL BE USED TO RENDER OPTION AND HIGHLIGHT IF USER DOESN'T PROVIDE ANY RENDER OPTIONS */
         return (
             <div>
@@ -219,12 +220,14 @@ export const MUIAutocomplete = <T extends Record<string, any> | string>(props: I
                 value={query}
                 ref={ref}
                 onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => handleChange(e.target.value as string)}
+                // @ts-ignore
                 fullWidth
                 error={error}
                 helperText={fieldError}
                 {...renderInputProps}
                 InputProps={{
                     ...params.InputProps,
+                    // @ts-ignore
                     endAdornment: (
                         <React.Fragment>
                             {loading ? <CircularProgress color="primary" size={20} /> : null}

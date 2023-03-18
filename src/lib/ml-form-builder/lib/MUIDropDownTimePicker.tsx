@@ -1,4 +1,4 @@
-import { FormControl, FormControlProps, FormHelperTextProps, InputLabel, InputLabelProps, MenuItem, MenuItemProps, Select, SelectProps, FormHelperText } from '@mui/material';
+import { FormControl, FormControlProps, FormHelperTextProps, InputLabel, InputLabelProps, MenuItem, MenuItemProps, Select, SelectProps, FormHelperText, SelectChangeEvent } from '@mui/material';
 import { FormikValues } from 'formik';
 import { get, isString, map } from 'lodash';
 import React, { FC } from 'react';
@@ -58,7 +58,7 @@ export const MUIDropDownTimePicker: FC<MUIDropDownTimePickerProps> = (props) => 
     const value = get(formikProps, `values.${fieldProps.name}`) || '';
     const list = getOptions(startTime, endTime, interval, amPm)
     const emptyItemText = (isString(emptyItem) ? emptyItem : 'None');
-    const onChange = (event: React.ChangeEvent<{
+    const onChange = (event: SelectChangeEvent<{
         name?: string | undefined;
         value: unknown;
     }>) => {

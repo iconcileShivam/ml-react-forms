@@ -3,9 +3,10 @@ import { IFieldProps } from '../index';
 import { FieldArray, FormikValues } from 'formik';
 import { get } from 'lodash';
 import { IconButton, Button, ButtonProps, IconButtonProps, TextFieldProps } from '@mui/material';
-import { createStyles, Theme, makeStyles } from '@mui/material/styles';
+import { createStyles, makeStyles } from '@mui/styles';
 import CloseIcon from '@mui/icons-material/Close';
 import { getComponentConfig } from '../index';
+import { Theme } from '@mui/material';
 
 interface IFieldArrayProps {
     name: string

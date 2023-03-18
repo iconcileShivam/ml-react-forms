@@ -7,7 +7,8 @@
   "jsnext:main": "dist/index.es.js",
   "scripts": {
     "build": "rm -rf dist/ && rollup -c",
-    "test": "jest"
+    "test": "jest",
+    "tsc": "tsc"
   },
   "files": [
     "dist"
@@ -18,17 +19,7 @@
     "preset": "ts-jest",
     "testEnvironment": "node"
   },
-  "peerDependencies": {
-    "@material-ui/core": "^4.9.0",
-    "@material-ui/icons": "^4.5.1",
-    "@material-ui/lab": "^4.0.0-alpha.40",
-    "@material-ui/pickers": "^3.2.8"
-  },
   "devDependencies": {
-    "@material-ui/core": "^4.12.4",
-    "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.40",
-    "@material-ui/pickers": "^3.2.8",
     "@types/autosuggest-highlight": "^3.1.0",
     "@types/jest": "^24.0.25",
     "@types/lodash": "^4.14.149",

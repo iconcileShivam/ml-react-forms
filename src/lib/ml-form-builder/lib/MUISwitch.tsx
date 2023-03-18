@@ -35,9 +35,6 @@ export const MUISwitch: React.FC<IProps> = (props) => {
                 />
             }
             label={label || ''}
-        >
-
-        </FormControlLabel>
-
+        />
     )
 }

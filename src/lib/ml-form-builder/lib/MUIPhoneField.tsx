@@ -5,12 +5,13 @@ import {
   FormControlProps,
   InputLabel,
   Select,
+  SelectChangeEvent,
   SelectProps,
   TextField,
   TextFieldProps,
   Typography
 } from "@mui/material";
-import { createStyles, Theme } from "@mui/material/styles";
+import { createStyles } from "@mui/styles";
 import { makeStyles } from "@mui/styles";
 import { FormikValues } from "formik";
 import { get } from "lodash";
@@ -18,7 +19,7 @@ import React, { FC, useEffect, useState } from "react";
 import { IFieldProps } from "..";
 import { getFieldError } from "../Utils";
 import { COUNTRY_LIST } from "./Constants";
-
+import { Theme } from '@mui/material';
 
 
 export interface IMUIPhoneFieldProps {
@@ -71,7 +72,7 @@ export const MUIPhoneField: FC<MUIPhoneFieldProps> = (props) => {
     let number = event.target.value.replace("-", "");
     formikProps.setFieldValue(`${fieldProps.name}`, `${code}-${number}`);
   };
-  const codeChange = (e: React.ChangeEvent<{ value: unknown }>) => {
+  const codeChange = (e: SelectChangeEvent<{ value: unknown }>) => {
     let number = value.split("-");
     formikProps.setFieldValue(`${fieldProps.name}`, `${e.target.value as string}-${number[1] || ''}`);
     setCode(e.target.value as string);

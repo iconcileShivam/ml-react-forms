@@ -1,6 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
 import _ from 'lodash';
+import { Theme } from '@mui/system';
 
 interface MUIFileInputProps {
 	disabled?: boolean
