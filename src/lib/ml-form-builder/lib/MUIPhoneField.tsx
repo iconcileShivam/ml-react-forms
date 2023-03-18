@@ -19,7 +19,7 @@ import React, { FC, useEffect, useState } from "react";
 import { IFieldProps } from "..";
 import { getFieldError } from "../Utils";
 import { COUNTRY_LIST } from "./Constants";
-import { Theme } from '@mui/material';
+import { Theme } from '@mui/system';
 
 
 export interface IMUIPhoneFieldProps {

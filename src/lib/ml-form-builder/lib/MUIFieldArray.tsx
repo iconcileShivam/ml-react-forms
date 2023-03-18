@@ -6,7 +6,7 @@ import { IconButton, Button, ButtonProps, IconButtonProps, TextFieldProps } from
 import { createStyles, makeStyles } from '@mui/styles';
 import CloseIcon from '@mui/icons-material/Close';
 import { getComponentConfig } from '../index';
-import { Theme } from '@mui/material';
+import { Theme } from '@mui/system';
 
 interface IFieldArrayProps {
     name: string
