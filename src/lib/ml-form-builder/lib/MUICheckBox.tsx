@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IFieldProps, FormConfig } from '../index';
-import { Checkbox, FormControl, FormControlProps, FormHelperText, FormHelperTextProps, FormControlLabel, FormControlLabelProps, CheckboxProps, FormLabel, FormLabelProps, FormGroup, FormGroupProps } from '@material-ui/core';
+import { Checkbox, FormControl, FormControlProps, FormHelperText, FormHelperTextProps, FormControlLabel, FormControlLabelProps, CheckboxProps, FormLabel, FormLabelProps, FormGroup, FormGroupProps } from '@mui/material';
 import { FormikValues } from 'formik';
 import { get, isEmpty, map, indexOf } from 'lodash';
 import { getFieldError, getMenuOptions, MenuOptions, MenuOptionObject } from '../Utils';

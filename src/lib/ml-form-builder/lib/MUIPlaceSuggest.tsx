@@ -4,8 +4,8 @@ import { FormikValues } from 'formik';
 import { IFieldProps } from '../index';
 import { getFieldError } from '../Utils';
 
-import { TextField, List, ListItem, ListItemText, InputAdornment, IconButton, TextFieldProps, ListProps, ListItemProps, Paper } from '@material-ui/core';
-import { Close } from '@material-ui/icons';
+import { TextField, List, ListItem, ListItemText, InputAdornment, IconButton, TextFieldProps, ListProps, ListItemProps, Paper } from '@mui/material';
+import { Close } from '@mui/icons-material';
 const { useState } = React;
 type IListItemProps = Omit<ListItemProps, 'button'>;
 export interface PlacesAutocompleteChildrenProps {

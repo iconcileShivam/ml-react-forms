@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import { makeStyles, Theme, createStyles } from '@mui/material';
 import _ from 'lodash';
 
 interface MUIFileInputProps {

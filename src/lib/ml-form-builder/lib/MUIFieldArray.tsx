@@ -2,9 +2,9 @@ import React from 'react';
 import { IFieldProps } from '../index';
 import { FieldArray, FormikValues } from 'formik';
 import { get } from 'lodash';
-import { IconButton, Button, ButtonProps, IconButtonProps, TextFieldProps } from '@material-ui/core';
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import CloseIcon from '@material-ui/icons/Close';
+import { IconButton, Button, ButtonProps, IconButtonProps, TextFieldProps } from '@mui/material';
+import { createStyles, Theme, makeStyles } from '@mui/material/styles';
+import CloseIcon from '@mui/icons-material/Close';
 import { getComponentConfig } from '../index';
 
 interface IFieldArrayProps {

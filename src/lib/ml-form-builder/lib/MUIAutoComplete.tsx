@@ -1,5 +1,5 @@
-import { CircularProgress, InputBaseComponentProps, TextField } from '@material-ui/core';
-import Autocomplete, { AutocompleteProps, RenderInputParams, RenderOptionState } from '@material-ui/lab/Autocomplete';
+import { CircularProgress, InputBaseComponentProps, TextField } from '@mui/material';
+import Autocomplete, { AutocompleteProps, RenderInputParams, RenderOptionState } from '@mui/lab/Autocomplete';
 import { FormikValues } from 'formik';
 import { filter, findIndex, get, isString, reduce } from 'lodash';
 import * as React from 'react';

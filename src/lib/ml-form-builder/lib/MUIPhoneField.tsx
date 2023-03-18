@@ -9,9 +9,9 @@ import {
   TextField,
   TextFieldProps,
   Typography
-} from "@material-ui/core";
-import { createStyles, Theme } from "@material-ui/core/styles";
-import { makeStyles } from "@material-ui/styles";
+} from "@mui/material";
+import { createStyles, Theme } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 import { FormikValues } from "formik";
 import { get } from "lodash";
 import React, { FC, useEffect, useState } from "react";

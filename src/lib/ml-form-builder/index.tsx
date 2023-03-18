@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { map, isArray, uniqueId, get, isFunction } from 'lodash';
-import Button, { ButtonProps } from '@material-ui/core/Button';
-import CircularProgress, { CircularProgressProps } from '@material-ui/core/CircularProgress';
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import Button, { ButtonProps } from '@mui/material/Button';
+import CircularProgress, { CircularProgressProps } from '@mui/material/CircularProgress';
+import { createStyles, Theme, makeStyles } from '@mui/material/styles';
 import clsx from 'clsx';
 import { FormikValues } from 'formik';
 import { MUITextField, MUISelectField, MUICheckBox, MUISwitch, MUIRadio, MUIPlaceSuggest, MUIAutocomplete, MUIFieldArray, MUIDropDownTimePicker, MUIPhoneField } from './lib';

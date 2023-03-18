@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormikValues } from 'formik';
-import TextField, { TextFieldProps } from '@material-ui/core/TextField';
+import TextField, { TextFieldProps } from '@mui/material/TextField';
 import { IFieldProps } from '../index';
 import { get } from 'lodash';
 import { getFieldError } from '../Utils';

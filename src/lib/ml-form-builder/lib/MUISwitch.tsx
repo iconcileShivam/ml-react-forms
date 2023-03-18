@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IFieldProps } from '../index';
 import { FormikValues } from 'formik';
-import { Switch, SwitchProps, FormControlLabel } from '@material-ui/core';
+import { Switch, SwitchProps, FormControlLabel } from '@mui/material';
 import { get } from 'lodash';
 
 

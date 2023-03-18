@@ -1,4 +1,4 @@
-import { FormControl, FormControlProps, FormHelperTextProps, InputLabel, InputLabelProps, MenuItem, MenuItemProps, Select, SelectProps, FormHelperText } from '@material-ui/core';
+import { FormControl, FormControlProps, FormHelperTextProps, InputLabel, InputLabelProps, MenuItem, MenuItemProps, Select, SelectProps, FormHelperText } from '@mui/material';
 import { FormikValues } from 'formik';
 import { get, isString, map } from 'lodash';
 import React, { FC } from 'react';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IFieldProps } from '../index';
 import { FormikValues } from 'formik';
-import { FormLabel, FormControlLabel, FormHelperText, FormHelperTextProps, FormControl, FormControlProps, RadioGroup, RadioGroupProps, Radio, RadioProps, FormControlLabelProps, FormLabelProps } from '@material-ui/core';
+import { FormLabel, FormControlLabel, FormHelperText, FormHelperTextProps, FormControl, FormControlProps, RadioGroup, RadioGroupProps, Radio, RadioProps, FormControlLabelProps, FormLabelProps } from '@mui/material';
 import { get, map } from 'lodash';
 import { MenuOptionObject, getMenuOptions, getFieldError } from '../Utils';
 

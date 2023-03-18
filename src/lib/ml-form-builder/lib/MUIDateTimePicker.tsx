@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { KeyboardDatePicker, KeyboardDatePickerProps, TimePickerProps, KeyboardTimePicker } from '@material-ui/pickers';
+// import { KeyboardDatePicker, KeyboardDatePickerProps, TimePickerProps, KeyboardTimePicker } from '@material-ui/pickers';
+import { DatePicker, DatePickerProps, TimePicker, TimePickerProps } from '@mui/lab';
 import { FormikValues } from 'formik';
 import { get } from 'lodash';
 import { IFieldProps } from '..';
 
-export interface IMUIDatePickerProps extends KeyboardDatePickerProps {
+export interface IMUIDatePickerProps extends DatePickerProps<any> {
     outputFormat?: string
 }
 
@@ -41,14 +42,14 @@ export const MUIDatePicker: React.FC<IFieldProps & { fieldProps?: IMUIDatePicker
     };
 
     return (
-        <KeyboardDatePicker
+        <DatePicker
             {...updatedProps}
         />
     )
 }
 
-export const MUITimePicker: React.FC<IFieldProps & { fieldProps?: TimePickerProps }> = props => {
-    const { fieldProps = {} as TimePickerProps, formikProps = {} as FormikValues } = props;
+export const MUITimePicker: React.FC<IFieldProps & { fieldProps?: TimePickerProps<any> }> = props => {
+    const { fieldProps = {} as TimePickerProps<any>, formikProps = {} as FormikValues } = props;
     const fieldError = get(formikProps, `errors.${fieldProps.name}`);
     const value = get(formikProps, `values.${fieldProps.name}`);
     const handleTimeChange = (time: any | null) => {
@@ -71,7 +72,7 @@ export const MUITimePicker: React.FC<IFieldProps & { fieldProps?: TimePickerProp
         },
     };
     return (
-        <KeyboardTimePicker  {...updatedProps} />
+        <TimePicker  {...updatedProps} />
     )
 }
 

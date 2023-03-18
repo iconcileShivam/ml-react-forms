@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import { IFieldProps } from '../index';
 
 export interface IProps extends IFieldProps {

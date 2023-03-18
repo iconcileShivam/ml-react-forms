@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { map, isString, get } from 'lodash';
 import { FormikValues } from 'formik';
-import { MenuItemProps } from '@material-ui/core';
+import { MenuItemProps } from '@mui/material';
 
 
 export type MenuOptionObject = { name: string | React.ReactNode, value: string, menuItemProps?: MenuItemProps };
