@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { map, isArray, uniqueId, get, isFunction } from 'lodash';
-import Button, { ButtonProps } from '@mui/material/Button';
-import CircularProgress, { CircularProgressProps } from '@mui/material/CircularProgress';
 import { createStyles, makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 import { FormikValues } from 'formik';
@@ -9,6 +7,7 @@ import { MUITextField, MUISelectField, MUICheckBox, MUISwitch, MUIRadio, MUIPlac
 import { MUIDatePicker, MUITimePicker } from './lib/MUIDateTimePicker';
 import { getConditionalProps, TFieldConditions } from './lib/ConditionalOperation';
 import { Theme } from '@mui/system';
+import { LoadingButton, LoadingButtonProps } from '@mui/lab';
 
 
 
@@ -52,12 +51,11 @@ export interface FormRowProps {
 type submitButtonLayout = "right" | "center" | "fullWidth";
 export interface IFormActionProps {
     submitButtonText?: string,
-    submitButtonProps?: ButtonProps
+    submitButtonProps?: LoadingButtonProps
     submitButtonLayout?: submitButtonLayout,
     actionContent?: JSX.Element,
     containerClassNames?: string | string[],
     displayActions?: boolean
-    loaderProps?: CircularProgressProps
 }
 export interface BuilderProps {
     schema: Array<RowSchema>
@@ -184,7 +182,7 @@ export const MLFormContent: React.FC<BuilderProps> = props => {
 }
 
 export const MLFormAction: React.FC<IFormActionProps & Pick<BuilderProps, 'formId' | 'formikProps'>> = (props) => {
-    const { formId, formikProps = {} as FormikValues, containerClassNames, submitButtonLayout = 'center', submitButtonText = "Submit", submitButtonProps, loaderProps } = props;
+    const { formId, formikProps = {} as FormikValues, containerClassNames, submitButtonLayout = 'center', submitButtonText = "Submit", submitButtonProps } = props;
     const classes = useFormStyles();
     if (props.actionContent)
         return (React.cloneElement(props.actionContent || <div />, { formikProps }));
@@ -195,12 +193,7 @@ export const MLFormAction: React.FC<IFormActionProps & Pick<BuilderProps, 'formI
                 (props.actionContent) ?
                     (React.cloneElement(props.actionContent || <div />, { formikProps, formId }))
                     : (
-                        <>
-                            <Button type="submit" disabled={formikProps.isSubmitting} variant="contained" color="primary" {...submitButtonProps}>{submitButtonText}</Button>
-                            {
-                                (formikProps.isSubmitting) && (<CircularProgress size={24} color="secondary" className={classes.submitLoader} {...loaderProps} />)
-                            }
-                        </>
+                        <LoadingButton loading={formikProps.isSubmitting} type="submit" disabled={formikProps.isSubmitting} variant="contained" color="primary" {...submitButtonProps}>{submitButtonText}</LoadingButton>
                     )
             }
 
