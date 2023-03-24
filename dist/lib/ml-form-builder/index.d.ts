@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { ButtonProps } from '@mui/material/Button';
-import { CircularProgressProps } from '@mui/material/CircularProgress';
 import { FormikValues } from 'formik';
 import { TFieldConditions } from './lib/ConditionalOperation';
+import { LoadingButtonProps } from '@mui/lab';
 export interface ReadOnlyProps {
     renderer: (props: IFieldProps) => React.ReactNode;
 }
@@ -39,12 +38,11 @@ export interface FormRowProps {
 declare type submitButtonLayout = "right" | "center" | "fullWidth";
 export interface IFormActionProps {
     submitButtonText?: string;
-    submitButtonProps?: ButtonProps;
+    submitButtonProps?: LoadingButtonProps;
     submitButtonLayout?: submitButtonLayout;
     actionContent?: JSX.Element;
     containerClassNames?: string | string[];
     displayActions?: boolean;
-    loaderProps?: CircularProgressProps;
 }
 export interface BuilderProps {
     schema: Array<RowSchema>;

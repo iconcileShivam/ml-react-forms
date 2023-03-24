@@ -8,8 +8,6 @@ var React = require('react');
 var React__default = _interopDefault(React);
 var _ = require('lodash');
 var ___default = _interopDefault(_);
-var Button = _interopDefault(require('@mui/material/Button'));
-var CircularProgress = _interopDefault(require('@mui/material/CircularProgress'));
 var styles = require('@mui/styles');
 var TextField = _interopDefault(require('@mui/material/TextField'));
 var Typography = _interopDefault(require('@mui/material/Typography'));
@@ -830,16 +828,14 @@ var MLFormContent = function (props) {
     })));
 };
 var MLFormAction = function (props) {
-    var formId = props.formId, _a = props.formikProps, formikProps = _a === void 0 ? {} : _a, containerClassNames = props.containerClassNames, _b = props.submitButtonLayout, submitButtonLayout = _b === void 0 ? 'center' : _b, _c = props.submitButtonText, submitButtonText = _c === void 0 ? "Submit" : _c, submitButtonProps = props.submitButtonProps, loaderProps = props.loaderProps;
+    var formId = props.formId, _a = props.formikProps, formikProps = _a === void 0 ? {} : _a, containerClassNames = props.containerClassNames, _b = props.submitButtonLayout, submitButtonLayout = _b === void 0 ? 'center' : _b, _c = props.submitButtonText, submitButtonText = _c === void 0 ? "Submit" : _c, submitButtonProps = props.submitButtonProps;
     var classes = useFormStyles();
     if (props.actionContent)
         return (React.cloneElement(props.actionContent || React.createElement("div", null), { formikProps: formikProps }));
     var layoutClassName = "action-" + submitButtonLayout;
     return (React.createElement("div", { className: clsx(classes.actionContainer, layoutClassName, containerClassNames) }, (props.actionContent) ?
         (React.cloneElement(props.actionContent || React.createElement("div", null), { formikProps: formikProps, formId: formId }))
-        : (React.createElement(React.Fragment, null,
-            React.createElement(Button, __assign({ type: "submit", disabled: formikProps.isSubmitting, variant: "contained", color: "primary" }, submitButtonProps), submitButtonText),
-            (formikProps.isSubmitting) && (React.createElement(CircularProgress, __assign({ size: 24, color: "secondary", className: classes.submitLoader }, loaderProps)))))));
+        : (React.createElement(lab.LoadingButton, __assign({ loading: formikProps.isSubmitting, type: "submit", disabled: formikProps.isSubmitting, variant: "contained", color: "primary" }, submitButtonProps), submitButtonText))));
 };
 var MLFormBuilder = function (props) {
     var _a = props.formikProps, formikProps = _a === void 0 ? {} : _a, _b = props.isInProgress, isInProgress = _b === void 0 ? false : _b, _c = props.actionConfig, actionConfig = _c === void 0 ? {} : _c;

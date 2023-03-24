@@ -1,14 +1,12 @@
 import React__default, { createElement, useEffect as useEffect$1, useState as useState$2, useRef, Fragment, cloneElement } from 'react';
 import _, { map, isString, get, isEmpty, indexOf, filter, findIndex, reduce, forEach, isArray, isFunction, uniqueId } from 'lodash';
-import Button$1 from '@mui/material/Button';
-import CircularProgress$1 from '@mui/material/CircularProgress';
 import { makeStyles, createStyles } from '@mui/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { FormControl, InputLabel, Select, MenuItem, FormHelperText, FormLabel, FormGroup, FormControlLabel, Checkbox, Switch, RadioGroup, Radio, InputAdornment, IconButton, TextField as TextField$1, Paper, List, ListItem, ListItemText, CircularProgress, Button, Box, Typography as Typography$1 } from '@mui/material';
 import PlacesAutocomplete, { getLatLng, geocodeByAddress } from 'react-places-autocomplete';
 import { Close } from '@mui/icons-material';
-import { DatePicker, TimePicker } from '@mui/lab';
+import { DatePicker, TimePicker, LoadingButton } from '@mui/lab';
 import Autocomplete from '@mui/material/Autocomplete';
 import Highlighter from 'react-highlight-words';
 import { FieldArray, Formik } from 'formik';
@@ -821,16 +819,14 @@ var MLFormContent = function (props) {
     })));
 };
 var MLFormAction = function (props) {
-    var formId = props.formId, _a = props.formikProps, formikProps = _a === void 0 ? {} : _a, containerClassNames = props.containerClassNames, _b = props.submitButtonLayout, submitButtonLayout = _b === void 0 ? 'center' : _b, _c = props.submitButtonText, submitButtonText = _c === void 0 ? "Submit" : _c, submitButtonProps = props.submitButtonProps, loaderProps = props.loaderProps;
+    var formId = props.formId, _a = props.formikProps, formikProps = _a === void 0 ? {} : _a, containerClassNames = props.containerClassNames, _b = props.submitButtonLayout, submitButtonLayout = _b === void 0 ? 'center' : _b, _c = props.submitButtonText, submitButtonText = _c === void 0 ? "Submit" : _c, submitButtonProps = props.submitButtonProps;
     var classes = useFormStyles();
     if (props.actionContent)
         return (cloneElement(props.actionContent || createElement("div", null), { formikProps: formikProps }));
     var layoutClassName = "action-" + submitButtonLayout;
     return (createElement("div", { className: clsx(classes.actionContainer, layoutClassName, containerClassNames) }, (props.actionContent) ?
         (cloneElement(props.actionContent || createElement("div", null), { formikProps: formikProps, formId: formId }))
-        : (createElement(Fragment, null,
-            createElement(Button$1, __assign({ type: "submit", disabled: formikProps.isSubmitting, variant: "contained", color: "primary" }, submitButtonProps), submitButtonText),
-            (formikProps.isSubmitting) && (createElement(CircularProgress$1, __assign({ size: 24, color: "secondary", className: classes.submitLoader }, loaderProps)))))));
+        : (createElement(LoadingButton, __assign({ loading: formikProps.isSubmitting, type: "submit", disabled: formikProps.isSubmitting, variant: "contained", color: "primary" }, submitButtonProps), submitButtonText))));
 };
 var MLFormBuilder = function (props) {
     var _a = props.formikProps, formikProps = _a === void 0 ? {} : _a, _b = props.isInProgress, isInProgress = _b === void 0 ? false : _b, _c = props.actionConfig, actionConfig = _c === void 0 ? {} : _c;
