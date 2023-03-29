@@ -116,18 +116,20 @@ export const BuildFormRow: React.FC<FormRowProps> = props => {
     const classes = useFormStyles();
     const rowStyle = { marginBottom: (rowSettings.verticalSpacing || 10) };
 
-    let hiddenItems = filter(colItems, (item: FormConfig) => {
-        const componentConfig = ComponentMapConfig[item.type];
-        const conditionalProps = getConditionalProps(item, formikProps);
-        return (!componentConfig || conditionalProps.hidden === true)
-    }).length
+    const isLastItem = (index: number): boolean => {
+        return Boolean(filter(colItems.slice(index), (item: FormConfig) => {
+            const componentConfig = ComponentMapConfig[item.type];
+            const conditionalProps = getConditionalProps(item, formikProps);
+            return (componentConfig && !conditionalProps.hidden)
+        }).length)
+    }
 
     return (
         <div className={classes.row} style={rowStyle}>
             {
                 map(colItems, (item: FormConfig, index) => {
                     const componentConfig = ComponentMapConfig[item.type];
-                    const horizontalSpacing = (index === (colItems.length - 1 - hiddenItems)) ? 0 : (rowSettings.horizontalSpacing || 10);
+                    const horizontalSpacing = isLastItem(index) ? 0 : (rowSettings.horizontalSpacing || 10);
                     if (!componentConfig)
                         return null;
 
