@@ -794,15 +794,15 @@ var BuildFormRow = function (props) {
     var classes = useFormStyles();
     var rowStyle = { marginBottom: (rowSettings.verticalSpacing || 10) };
     var isLastItem = function (index) {
-        return Boolean(_.filter(colItems.slice(index), function (item) {
+        return _.filter(colItems.slice(index), function (item) {
             var componentConfig = ComponentMapConfig[item.type];
             var conditionalProps = getConditionalProps(item, formikProps);
             return (componentConfig && !conditionalProps.hidden);
-        }).length);
+        }).length === 0;
     };
     return (React.createElement("div", { className: classes.row, style: rowStyle }, _.map(colItems, function (item, index) {
         var componentConfig = ComponentMapConfig[item.type];
-        var horizontalSpacing = isLastItem(index) ? 0 : (rowSettings.horizontalSpacing || 10);
+        var horizontalSpacing = ((index == colItems.length - 1) || isLastItem(index)) ? 0 : (rowSettings.horizontalSpacing || 10);
         if (!componentConfig)
             return null;
         var conditionalProps = getConditionalProps(item, formikProps);
