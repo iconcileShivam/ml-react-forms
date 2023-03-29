@@ -794,7 +794,7 @@ var BuildFormRow = function (props) {
     var classes = useFormStyles();
     var rowStyle = { marginBottom: (rowSettings.verticalSpacing || 10) };
     var doNotHaveMoreElements = function (index) {
-        return _.filter(colItems.slice(index), function (item) {
+        return _.filter(colItems.slice(index + 1), function (item) {
             var componentConfig = ComponentMapConfig[item.type];
             var conditionalProps = getConditionalProps(item, formikProps);
             return (componentConfig && !(conditionalProps.hidden === true));

@@ -117,7 +117,7 @@ export const BuildFormRow: React.FC<FormRowProps> = props => {
     const rowStyle = { marginBottom: (rowSettings.verticalSpacing || 10) };
 
     const doNotHaveMoreElements = (index: number): boolean => {
-        return filter(colItems.slice(index), (item: FormConfig) => {
+        return filter(colItems.slice(index + 1), (item: FormConfig) => {
             const componentConfig = ComponentMapConfig[item.type];
             const conditionalProps = getConditionalProps(item, formikProps);
             return (componentConfig && !(conditionalProps.hidden === true))
