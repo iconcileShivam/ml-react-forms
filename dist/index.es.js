@@ -788,12 +788,12 @@ var BuildFormRow = function (props) {
         var componentConfig = ComponentMapConfig[item.type];
         var horizontalSpacing = (index === (colItems.length - 1)) ? 0 : (rowSettings.horizontalSpacing || 10);
         if (!componentConfig)
-            return createElement("div", { key: rowId + "_field_" + index });
+            return null;
         var conditionalProps = getConditionalProps(item, formikProps);
         var fieldProps = __assign(__assign(__assign({ id: item.id, name: (item.name || item.valueKey) }, componentConfig.props), item.fieldProps), conditionalProps.finalProps);
         var Component = componentConfig.component;
         if (conditionalProps.hidden === true)
-            return createElement("div", { key: rowId + "_field_" + index });
+            return null;
         return (createElement("div", { key: rowId + "_field_" + index, className: clsx(item.classNames, classes.column), style: __assign({ flex: (item.flex || 1), marginRight: horizontalSpacing, paddingLeft: rowSettings.columnHorizontalPadding, paddingRight: rowSettings.columnHorizontalPadding }, item.styles) }, (settings.isReadOnly && item.readOnlyProps && isFunction(item.readOnlyProps.renderer)) ?
             (item.readOnlyProps.renderer({ formikProps: formikProps, fieldConfig: item, isReadOnly: settings.isReadOnly })) :
             cloneElement(Component, { fieldProps: fieldProps, formikProps: formikProps, fieldConfig: item, isReadOnly: settings.isReadOnly })));

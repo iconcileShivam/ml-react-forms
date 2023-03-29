@@ -122,13 +122,13 @@ export const BuildFormRow: React.FC<FormRowProps> = props => {
                     const componentConfig = ComponentMapConfig[item.type];
                     const horizontalSpacing = (index === (colItems.length - 1)) ? 0 : (rowSettings.horizontalSpacing || 10);
                     if (!componentConfig)
-                        return <div key={`${rowId}_field_${index}`} />;
+                        return null;
 
                     const conditionalProps = getConditionalProps(item, formikProps);
                     const fieldProps = { id: item.id, name: (item.name || item.valueKey), ...componentConfig.props, ...item.fieldProps, ...conditionalProps.finalProps };
                     const Component = componentConfig.component;
                     if (conditionalProps.hidden === true)
-                        return <div key={`${rowId}_field_${index}`} />;
+                        return null;
                     return (
                         <div key={`${rowId}_field_${index}`} className={clsx(item.classNames, classes.column)} style={
                             {
