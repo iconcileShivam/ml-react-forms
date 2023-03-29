@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { map, isArray, uniqueId, get, isFunction } from 'lodash';
+import { map, isArray, uniqueId, get, isFunction, filter } from 'lodash';
 import { createStyles, makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 import { FormikValues } from 'formik';
@@ -115,12 +115,19 @@ export const BuildFormRow: React.FC<FormRowProps> = props => {
     const colItems = (isArray(schema) ? schema : ((isArray(columnItems) ? columnItems : [schema])));
     const classes = useFormStyles();
     const rowStyle = { marginBottom: (rowSettings.verticalSpacing || 10) };
+
+    let hiddenItems = filter(colItems, (item: FormConfig) => {
+        const componentConfig = ComponentMapConfig[item.type];
+        const conditionalProps = getConditionalProps(item, formikProps);
+        return (!componentConfig || conditionalProps.hidden === true)
+    }).length
+
     return (
         <div className={classes.row} style={rowStyle}>
             {
                 map(colItems, (item: FormConfig, index) => {
                     const componentConfig = ComponentMapConfig[item.type];
-                    const horizontalSpacing = (index === (colItems.length - 1)) ? 0 : (rowSettings.horizontalSpacing || 10);
+                    const horizontalSpacing = (index === (colItems.length - 1 - hiddenItems)) ? 0 : (rowSettings.horizontalSpacing || 10);
                     if (!componentConfig)
                         return null;
 

@@ -784,9 +784,14 @@ var BuildFormRow = function (props) {
     var colItems = (isArray(schema) ? schema : ((isArray(columnItems) ? columnItems : [schema])));
     var classes = useFormStyles();
     var rowStyle = { marginBottom: (rowSettings.verticalSpacing || 10) };
+    var hiddenItems = filter(colItems, function (item) {
+        var componentConfig = ComponentMapConfig[item.type];
+        var conditionalProps = getConditionalProps(item, formikProps);
+        return (!componentConfig || conditionalProps.hidden === true);
+    }).length;
     return (createElement("div", { className: classes.row, style: rowStyle }, map(colItems, function (item, index) {
         var componentConfig = ComponentMapConfig[item.type];
-        var horizontalSpacing = (index === (colItems.length - 1)) ? 0 : (rowSettings.horizontalSpacing || 10);
+        var horizontalSpacing = (index === (colItems.length - 1 - hiddenItems)) ? 0 : (rowSettings.horizontalSpacing || 10);
         if (!componentConfig)
             return null;
         var conditionalProps = getConditionalProps(item, formikProps);

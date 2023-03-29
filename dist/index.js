@@ -793,9 +793,14 @@ var BuildFormRow = function (props) {
     var colItems = (_.isArray(schema) ? schema : ((_.isArray(columnItems) ? columnItems : [schema])));
     var classes = useFormStyles();
     var rowStyle = { marginBottom: (rowSettings.verticalSpacing || 10) };
+    var hiddenItems = _.filter(colItems, function (item) {
+        var componentConfig = ComponentMapConfig[item.type];
+        var conditionalProps = getConditionalProps(item, formikProps);
+        return (!componentConfig || conditionalProps.hidden === true);
+    }).length;
     return (React.createElement("div", { className: classes.row, style: rowStyle }, _.map(colItems, function (item, index) {
         var componentConfig = ComponentMapConfig[item.type];
-        var horizontalSpacing = (index === (colItems.length - 1)) ? 0 : (rowSettings.horizontalSpacing || 10);
+        var horizontalSpacing = (index === (colItems.length - 1 - hiddenItems)) ? 0 : (rowSettings.horizontalSpacing || 10);
         if (!componentConfig)
             return null;
         var conditionalProps = getConditionalProps(item, formikProps);
