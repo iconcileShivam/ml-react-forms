@@ -15,12 +15,13 @@ var material = require('@mui/material');
 var PlacesAutocomplete = require('react-places-autocomplete');
 var PlacesAutocomplete__default = _interopDefault(PlacesAutocomplete);
 var iconsMaterial = require('@mui/icons-material');
-var lab = require('@mui/lab');
+var xDatePickers = require('@mui/x-date-pickers');
 var Autocomplete = _interopDefault(require('@mui/material/Autocomplete'));
 var Highlighter = _interopDefault(require('react-highlight-words'));
 var formik = require('formik');
 var CloseIcon = _interopDefault(require('@mui/icons-material/Close'));
 var moment = _interopDefault(require('moment'));
+var lab = require('@mui/lab');
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -310,7 +311,7 @@ var MUIDatePicker = function (props) {
                 formikProps.setFieldError(fieldProps.name, error);
             }
         } });
-    return (React.createElement(lab.DatePicker, __assign({}, updatedProps)));
+    return (React.createElement(xDatePickers.DatePicker, __assign({}, updatedProps)));
 };
 var MUITimePicker = function (props) {
     var _a = props.fieldProps, fieldProps = _a === void 0 ? {} : _a, _b = props.formikProps, formikProps = _b === void 0 ? {} : _b;
@@ -327,7 +328,7 @@ var MUITimePicker = function (props) {
                 formikProps.setFieldError(fieldProps.name, error);
             }
         } });
-    return (React.createElement(lab.TimePicker, __assign({}, updatedProps)));
+    return (React.createElement(xDatePickers.TimePicker, __assign({}, updatedProps)));
 };
 
 var TIME_BETWEEN_REQS = 300;

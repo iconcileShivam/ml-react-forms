@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { DatePicker, DatePickerProps, TimePicker, TimePickerProps } from '@mui/lab';
+import { DatePicker, DatePickerProps, TimePicker, TimePickerProps } from '@mui/x-date-pickers';
 import { FormikValues } from 'formik';
 import { get } from 'lodash';
 import { IFieldProps } from '..';
 
 export interface IMUIDatePickerProps extends DatePickerProps<any> {
     outputFormat?: string
+    name?: string
 }
 
 export const MUIDatePicker: React.FC<IFieldProps & { fieldProps?: IMUIDatePickerProps }> = (props) => {
@@ -47,8 +48,12 @@ export const MUIDatePicker: React.FC<IFieldProps & { fieldProps?: IMUIDatePicker
     )
 }
 
-export const MUITimePicker: React.FC<IFieldProps & { fieldProps?: TimePickerProps<any> }> = props => {
-    const { fieldProps = {} as TimePickerProps<any>, formikProps = {} as FormikValues } = props;
+export interface IMUITimePickerProps extends TimePickerProps<any> {
+    name?: string
+}
+
+export const MUITimePicker: React.FC<IFieldProps & { fieldProps?: IMUITimePickerProps }> = props => {
+    const { fieldProps = {} as IMUITimePickerProps, formikProps = {} as FormikValues } = props;
     const fieldError = get(formikProps, `errors.${fieldProps.name}`);
     const value = get(formikProps, `values.${fieldProps.name}`);
     const handleTimeChange = (time: any | null) => {
