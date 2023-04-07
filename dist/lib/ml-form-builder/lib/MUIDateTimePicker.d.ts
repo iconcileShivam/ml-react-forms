@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { DatePickerProps, TimePickerProps } from '@mui/x-date-pickers';
+import { DatePickerProps } from '@mui/x-date-pickers/DatePicker';
+import { TimePickerProps } from '@mui/x-date-pickers/TimePicker';
 import { IFieldProps } from '..';
 export interface IMUIDatePickerProps extends DatePickerProps<any> {
     outputFormat?: string;

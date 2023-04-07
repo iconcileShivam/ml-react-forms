@@ -15,7 +15,8 @@ var material = require('@mui/material');
 var PlacesAutocomplete = require('react-places-autocomplete');
 var PlacesAutocomplete__default = _interopDefault(PlacesAutocomplete);
 var iconsMaterial = require('@mui/icons-material');
-var xDatePickers = require('@mui/x-date-pickers');
+var DatePicker = require('@mui/x-date-pickers/DatePicker');
+var TimePicker = require('@mui/x-date-pickers/TimePicker');
 var AdapterDateFns = _interopDefault(require('@mui/lab/AdapterDateFns'));
 var LocalizationProvider = _interopDefault(require('@mui/lab/LocalizationProvider'));
 var Autocomplete = _interopDefault(require('@mui/material/Autocomplete'));
@@ -314,7 +315,7 @@ var MUIDatePicker = function (props) {
             }
         } });
     return (React.createElement(LocalizationProvider, { dateAdapter: AdapterDateFns },
-        React.createElement(xDatePickers.DatePicker, __assign({}, updatedProps))));
+        React.createElement(DatePicker.DatePicker, __assign({}, updatedProps))));
 };
 var MUITimePicker = function (props) {
     var _a = props.fieldProps, fieldProps = _a === void 0 ? {} : _a, _b = props.formikProps, formikProps = _b === void 0 ? {} : _b;
@@ -331,7 +332,7 @@ var MUITimePicker = function (props) {
                 formikProps.setFieldError(fieldProps.name, error);
             }
         } });
-    return (React.createElement(xDatePickers.TimePicker, __assign({}, updatedProps)));
+    return (React.createElement(TimePicker.TimePicker, __assign({}, updatedProps)));
 };
 
 var TIME_BETWEEN_REQS = 300;

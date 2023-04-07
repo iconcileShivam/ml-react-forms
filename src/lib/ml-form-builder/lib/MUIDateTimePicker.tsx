@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { DatePicker, DatePickerProps, TimePicker, TimePickerProps } from '@mui/x-date-pickers';
+import { DatePicker, DatePickerProps } from '@mui/x-date-pickers/DatePicker';
+import { TimePicker, TimePickerProps } from '@mui/x-date-pickers/TimePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import { FormikValues } from 'formik';
