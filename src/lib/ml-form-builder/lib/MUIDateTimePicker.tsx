@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { DatePicker, DatePickerProps, TimePicker, TimePickerProps } from '@mui/x-date-pickers';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import { FormikValues } from 'formik';
 import { get } from 'lodash';
 import { IFieldProps } from '..';
@@ -42,9 +44,9 @@ export const MUIDatePicker: React.FC<IFieldProps & { fieldProps?: IMUIDatePicker
     };
 
     return (
-        <DatePicker
-            {...updatedProps}
-        />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker {...updatedProps} />
+        </LocalizationProvider>
     )
 }
 
