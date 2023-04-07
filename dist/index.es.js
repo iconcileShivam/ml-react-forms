@@ -7,6 +7,8 @@ import { FormControl, InputLabel, Select, MenuItem, FormHelperText, FormLabel, F
 import PlacesAutocomplete, { getLatLng, geocodeByAddress } from 'react-places-autocomplete';
 import { Close } from '@mui/icons-material';
 import { DatePicker, TimePicker } from '@mui/x-date-pickers';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Autocomplete from '@mui/material/Autocomplete';
 import Highlighter from 'react-highlight-words';
 import { FieldArray, Formik } from 'formik';
@@ -302,7 +304,8 @@ var MUIDatePicker = function (props) {
                 formikProps.setFieldError(fieldProps.name, error);
             }
         } });
-    return (createElement(DatePicker, __assign({}, updatedProps)));
+    return (createElement(LocalizationProvider, { dateAdapter: AdapterDateFns },
+        createElement(DatePicker, __assign({}, updatedProps))));
 };
 var MUITimePicker = function (props) {
     var _a = props.fieldProps, fieldProps = _a === void 0 ? {} : _a, _b = props.formikProps, formikProps = _b === void 0 ? {} : _b;
