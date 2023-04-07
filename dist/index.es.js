@@ -8,8 +8,8 @@ import PlacesAutocomplete, { getLatLng, geocodeByAddress } from 'react-places-au
 import { Close } from '@mui/icons-material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import Autocomplete from '@mui/material/Autocomplete';
 import Highlighter from 'react-highlight-words';
 import { FieldArray, Formik } from 'formik';
@@ -305,7 +305,7 @@ var MUIDatePicker = function (props) {
                 formikProps.setFieldError(fieldProps.name, error);
             }
         } });
-    return (createElement(LocalizationProvider, { dateAdapter: AdapterDateFns },
+    return (createElement(LocalizationProvider, { dateAdapter: AdapterDayjs },
         createElement(DatePicker, __assign({}, updatedProps))));
 };
 var MUITimePicker = function (props) {
