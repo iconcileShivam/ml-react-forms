@@ -18,6 +18,7 @@ interface IFieldArrayProps {
     removeButton?: JSX.Element
     removeButtonProps?: IconButtonProps
     textFieldProps?: TextFieldProps
+    defaultData?: any
 }
 export interface IProps extends IFieldProps {
     fieldProps?: IFieldArrayProps
@@ -42,10 +43,13 @@ export interface IProps extends IFieldProps {
 
 export const MUIFieldArray: React.FC<IProps> = (props) => {
     const { formikProps = {} as FormikValues, fieldProps = {} as IFieldArrayProps } = props;
-    const { itemType, addButtonText = 'Add', addButtonProps, addButton, removeButton, removeButtonProps, textFieldProps = {} } = fieldProps;
+    const { itemType, addButtonText = 'Add', addButtonProps, addButton, removeButton, removeButtonProps, textFieldProps = {}, defaultData = {} } = fieldProps;
     const values = get(formikProps, `values.${fieldProps.name}`);
     const itemComponentConfig = getComponentConfig(itemType);
     const classes = useStyles();
+
+
+
     return (
         <FieldArray name={fieldProps.name}
             render={arrayHelpers => (
@@ -63,9 +67,9 @@ export const MUIFieldArray: React.FC<IProps> = (props) => {
                             </div>
                         ))
                     }
-                    {
-                        (addButton) ? addButton : (<Button type="button" onClick={() => arrayHelpers.push({})} {...addButtonProps}>{addButtonText}</Button>)
-                    }
+                    <div>
+                        {(addButton) ? addButton : (<Button type="button" onClick={() => arrayHelpers.push(defaultData)} {...addButtonProps}>{addButtonText}</Button>)}
+                    </div>
 
                 </div>
 
