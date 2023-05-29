@@ -11,6 +11,7 @@ interface IFieldArrayProps {
     removeButton?: JSX.Element;
     removeButtonProps?: IconButtonProps;
     textFieldProps?: TextFieldProps;
+    defaultData?: any;
 }
 export interface IProps extends IFieldProps {
     fieldProps?: IFieldArrayProps;
