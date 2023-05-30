@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Select, FormControl, FormControlProps, FormHelperText, FormHelperTextProps, MenuItem, InputLabel, SelectProps, MenuItemProps, InputLabelProps } from '@mui/material';
+import { Select, FormControl, FormControlProps, FormHelperText, FormHelperTextProps, MenuItem, InputLabel, SelectProps, MenuItemProps, InputLabelProps, SelectChangeEvent } from '@mui/material';
 import { IFieldProps, FormConfig } from '../index';
 import { FormikValues } from 'formik';
 import { get, map, isString } from 'lodash';
@@ -45,6 +45,14 @@ export const MUISelectField: React.FC<IProps> = (props) => {
         value = JSON.stringify(value)
     }
 
+    const handleChange = (e: SelectChangeEvent) => {
+        let data = e.target.value;
+        if (hasObjectValue) {
+            data = JSON.parse(data)
+        }
+        formikProps.setFieldValue(fieldProps.name, data)
+    }
+
     return (
         <FormControl error={!!fieldError} {...formControlProps}
         >
@@ -56,7 +64,7 @@ export const MUISelectField: React.FC<IProps> = (props) => {
                 labelId={labelId}
                 id={fieldConfig.id}
                 value={value}
-                onChange={formikProps.handleChange}
+                onChange={handleChange}
                 onBlur={formikProps.handleBlur}
                 label={label}
                 {...selectProps}
@@ -69,7 +77,19 @@ export const MUISelectField: React.FC<IProps> = (props) => {
                 }
                 {
                     // @ts-ignore MenuItem props types have some ambiguity in Mui type Definition
-                    map(menuOptions, (item: MenuOptionObject, index: number) => (<MenuItem key={`${fieldConfig.id}_menu_item_${index}`} value={item.value} {...menuItemProps} {...(item.menuItemProps || {})} >{item.name}</MenuItem>))
+                    map(menuOptions, (item: MenuOptionObject, index: number) => {
+                        const value = hasObjectValue ? JSON.stringify(item.value) : item.value
+                        return (
+                            <MenuItem
+                                key={`${fieldConfig.id}_menu_item_${index}`}
+                                value={value}
+                                {...menuItemProps}
+                                {...(item.menuItemProps || {})}
+                            >
+                                {item.name}
+                            </MenuItem>
+                        )
+                    })
                 }
             </Select>
             {

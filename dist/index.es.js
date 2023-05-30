@@ -145,14 +145,24 @@ var MUISelectField = function (props) {
     if (hasObjectValue) {
         value = JSON.stringify(value);
     }
+    var handleChange = function (e) {
+        var data = e.target.value;
+        if (hasObjectValue) {
+            data = JSON.parse(data);
+        }
+        formikProps.setFieldValue(fieldProps.name, data);
+    };
     return (createElement(FormControl, __assign({ error: !!fieldError }, formControlProps),
         label &&
             (createElement(InputLabel, __assign({ id: labelId }, inputLabelProps), label)),
-        createElement(Select, __assign({ labelId: labelId, id: fieldConfig.id, value: value, onChange: formikProps.handleChange, onBlur: formikProps.handleBlur, label: label }, selectProps),
+        createElement(Select, __assign({ labelId: labelId, id: fieldConfig.id, value: value, onChange: handleChange, onBlur: formikProps.handleBlur, label: label }, selectProps),
             (emptyItem) &&
                 (createElement(MenuItem, __assign({ value: '' }, emptyMenuItemProps), emptyItemText)),
             // @ts-ignore MenuItem props types have some ambiguity in Mui type Definition
-            map(menuOptions, function (item, index) { return (createElement(MenuItem, __assign({ key: fieldConfig.id + "_menu_item_" + index, value: item.value }, menuItemProps, (item.menuItemProps || {})), item.name)); })),
+            map(menuOptions, function (item, index) {
+                var value = hasObjectValue ? JSON.stringify(item.value) : item.value;
+                return (createElement(MenuItem, __assign({ key: fieldConfig.id + "_menu_item_" + index, value: value }, menuItemProps, (item.menuItemProps || {})), item.name));
+            })),
         (fieldError || fieldProps.helperText) &&
             (createElement(FormHelperText, __assign({}, formHelperTextProps), fieldError || fieldProps.helperText))));
 };

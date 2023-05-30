@@ -154,14 +154,24 @@ var MUISelectField = function (props) {
     if (hasObjectValue) {
         value = JSON.stringify(value);
     }
+    var handleChange = function (e) {
+        var data = e.target.value;
+        if (hasObjectValue) {
+            data = JSON.parse(data);
+        }
+        formikProps.setFieldValue(fieldProps.name, data);
+    };
     return (React.createElement(material.FormControl, __assign({ error: !!fieldError }, formControlProps),
         label &&
             (React.createElement(material.InputLabel, __assign({ id: labelId }, inputLabelProps), label)),
-        React.createElement(material.Select, __assign({ labelId: labelId, id: fieldConfig.id, value: value, onChange: formikProps.handleChange, onBlur: formikProps.handleBlur, label: label }, selectProps),
+        React.createElement(material.Select, __assign({ labelId: labelId, id: fieldConfig.id, value: value, onChange: handleChange, onBlur: formikProps.handleBlur, label: label }, selectProps),
             (emptyItem) &&
                 (React.createElement(material.MenuItem, __assign({ value: '' }, emptyMenuItemProps), emptyItemText)),
             // @ts-ignore MenuItem props types have some ambiguity in Mui type Definition
-            _.map(menuOptions, function (item, index) { return (React.createElement(material.MenuItem, __assign({ key: fieldConfig.id + "_menu_item_" + index, value: item.value }, menuItemProps, (item.menuItemProps || {})), item.name)); })),
+            _.map(menuOptions, function (item, index) {
+                var value = hasObjectValue ? JSON.stringify(item.value) : item.value;
+                return (React.createElement(material.MenuItem, __assign({ key: fieldConfig.id + "_menu_item_" + index, value: value }, menuItemProps, (item.menuItemProps || {})), item.name));
+            })),
         (fieldError || fieldProps.helperText) &&
             (React.createElement(material.FormHelperText, __assign({}, formHelperTextProps), fieldError || fieldProps.helperText))));
 };
