@@ -145,12 +145,15 @@ var MUITextField = function (props) {
 
 var MUISelectField = function (props) {
     var _a = props.fieldConfig, fieldConfig = _a === void 0 ? {} : _a, _b = props.formikProps, formikProps = _b === void 0 ? {} : _b, _c = props.fieldProps, fieldProps = _c === void 0 ? {} : _c;
-    var label = fieldProps.label, _d = fieldProps.options, options = _d === void 0 ? [] : _d, emptyItem = fieldProps.emptyItem, helperText = fieldProps.helperText, formControlProps = fieldProps.formControlProps, formHelperTextProps = fieldProps.formHelperTextProps, _e = fieldProps.emptyMenuItemProps, emptyMenuItemProps = _e === void 0 ? {} : _e, _f = fieldProps.menuItemProps, menuItemProps = _f === void 0 ? {} : _f, _g = fieldProps.inputLabelProps, inputLabelProps = _g === void 0 ? {} : _g, selectProps = __rest(fieldProps, ["label", "options", "emptyItem", "helperText", "formControlProps", "formHelperTextProps", "emptyMenuItemProps", "menuItemProps", "inputLabelProps"]);
+    var label = fieldProps.label, _d = fieldProps.options, options = _d === void 0 ? [] : _d, emptyItem = fieldProps.emptyItem, helperText = fieldProps.helperText, formControlProps = fieldProps.formControlProps, formHelperTextProps = fieldProps.formHelperTextProps, _e = fieldProps.emptyMenuItemProps, emptyMenuItemProps = _e === void 0 ? {} : _e, _f = fieldProps.menuItemProps, menuItemProps = _f === void 0 ? {} : _f, _g = fieldProps.inputLabelProps, inputLabelProps = _g === void 0 ? {} : _g, _h = fieldProps.hasObjectValue, hasObjectValue = _h === void 0 ? false : _h, selectProps = __rest(fieldProps, ["label", "options", "emptyItem", "helperText", "formControlProps", "formHelperTextProps", "emptyMenuItemProps", "menuItemProps", "inputLabelProps", "hasObjectValue"]);
     var labelId = fieldConfig.id + "_label";
     var fieldError = getFieldError((fieldProps.name || ''), formikProps);
     var emptyItemText = (_.isString(emptyItem) ? emptyItem : 'None');
     var menuOptions = getMenuOptions(options);
     var value = _.get(formikProps, "values." + fieldProps.name) || ((selectProps.multiple) ? [] : '');
+    if (hasObjectValue) {
+        value = JSON.stringify(value);
+    }
     return (React.createElement(material.FormControl, __assign({ error: !!fieldError }, formControlProps),
         label &&
             (React.createElement(material.InputLabel, __assign({ id: labelId }, inputLabelProps), label)),

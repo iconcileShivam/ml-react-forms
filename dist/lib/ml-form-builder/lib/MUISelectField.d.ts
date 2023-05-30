@@ -12,6 +12,7 @@ export interface IMUISelectProps extends SelectProps {
     emptyMenuItemProps?: object;
     menuItemProps?: object;
     inputLabelProps?: object;
+    hasObjectValue?: boolean;
 }
 export interface IProps extends IFieldProps {
     fieldProps?: IMUISelectProps;

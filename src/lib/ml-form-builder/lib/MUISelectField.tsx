@@ -15,6 +15,7 @@ export interface IMUISelectProps extends SelectProps {
     emptyMenuItemProps?: object
     menuItemProps?: object
     inputLabelProps?: object
+    hasObjectValue?: boolean
 }
 
 export interface IProps extends IFieldProps {
@@ -32,12 +33,17 @@ export const MUISelectField: React.FC<IProps> = (props) => {
         emptyMenuItemProps = {} as MenuItemProps,
         menuItemProps = {} as MenuItemProps,
         inputLabelProps = {} as InputLabelProps,
+        hasObjectValue = false,
         ...selectProps } = fieldProps;
     const labelId = `${fieldConfig.id}_label`;
     const fieldError = getFieldError((fieldProps.name || ''), formikProps);
     const emptyItemText = (isString(emptyItem) ? emptyItem : 'None');
     const menuOptions = getMenuOptions(options);
-    const value = get(formikProps, `values.${fieldProps.name}`) || ((selectProps.multiple) ? [] : '');
+    let value = get(formikProps, `values.${fieldProps.name}`) || ((selectProps.multiple) ? [] : '');
+
+    if (hasObjectValue) {
+        value = JSON.stringify(value)
+    }
 
     return (
         <FormControl error={!!fieldError} {...formControlProps}
