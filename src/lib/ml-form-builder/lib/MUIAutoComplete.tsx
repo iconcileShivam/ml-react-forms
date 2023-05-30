@@ -32,6 +32,7 @@ export interface IMUIAutoCompleteProps<T> extends Partial<AutocompleteProps<T, b
     onItemSelected?: (value: T | T[] | null) => void
     multiple?: boolean
     transformValues?: (values: any) => T | T[],
+    idKey?: string
     clearOnSelect?: boolean; // default: false
 }
 export interface IProps<T> extends IFieldProps {
@@ -58,6 +59,7 @@ export function MUIAutocomplete<T>(props: IProps<T>) {
         getOptionLabel = () => '',
         transformValues,
         multiple,
+        idKey = '',
         ...autoCompleteProps
     } = fieldProps
     const [defaultOptions, setDefaultOptions] = React.useState<T[]>([]);
@@ -210,6 +212,7 @@ export function MUIAutocomplete<T>(props: IProps<T>) {
         open={open}
         onClose={() => { setOpen(false) }}
         options={options.length > 0 ? options : defaultOptions}
+        isOptionEqualToValue={idKey ? (option: any, value: any) => option[idKey] === value[idKey] : undefined}
         renderOption={defaultRenderOptions}
         id={fieldConfig.valueKey}
         disableClearable={clearOnSelect}

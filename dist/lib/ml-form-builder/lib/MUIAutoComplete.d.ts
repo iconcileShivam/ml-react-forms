@@ -22,6 +22,7 @@ export interface IMUIAutoCompleteProps<T> extends Partial<AutocompleteProps<T, b
     onItemSelected?: (value: T | T[] | null) => void;
     multiple?: boolean;
     transformValues?: (values: any) => T | T[];
+    idKey?: string;
     clearOnSelect?: boolean;
 }
 export interface IProps<T> extends IFieldProps {
