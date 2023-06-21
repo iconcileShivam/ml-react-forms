@@ -19,7 +19,7 @@ export const MUITextField: React.FC<IProps> = (props) => {
         helperText: fieldError || fieldProps.helperText || '',
         onChange: formikProps.handleChange,
         onBlur: formikProps.handleBlur,
-        value: get(formikProps, `values.${fieldProps.name}`) || ''
+        value: get(formikProps, `values.${fieldProps.name}`) ?? ''
     };
     if (isReadOnly) {
         return (<MUIReadOnly label={updatedProps.label} value={updatedProps.value} />);
