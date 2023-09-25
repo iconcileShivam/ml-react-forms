@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 import { FormikValues } from 'formik';
 import { MUITextField, MUISelectField, MUICheckBox, MUISwitch, MUIRadio, MUIPlaceSuggest, MUIAutocomplete, MUIFieldArray, MUIDropDownTimePicker, MUIPhoneField } from './lib';
-import { MUIDatePicker, MUITimePicker } from './lib/MUIDateTimePicker';
+import { MUIDatePicker, MUIDateTimePicker, MUITimePicker } from './lib/MUIDateTimePicker';
 import { getConditionalProps, TFieldConditions } from './lib/ConditionalOperation';
 import { Theme } from '@mui/system';
 import { LoadingButton, LoadingButtonProps } from '@mui/lab';
@@ -106,6 +106,7 @@ attachField('autocomplete', < MUIAutocomplete />);
 attachField('array', <MUIFieldArray />);
 attachField('time-picker-select', <MUIDropDownTimePicker />)
 attachField('phone', <MUIPhoneField />)
+attachField('phone', <MUIDateTimePicker />)
 
 
 export const BuildFormRow: React.FC<FormRowProps> = props => {

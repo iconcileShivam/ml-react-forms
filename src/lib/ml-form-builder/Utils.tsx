@@ -15,11 +15,12 @@ export const getMenuOptions = (options: MenuOptions):Array<MenuOptionObject> => 
     });
 }
 
-export const getFieldError = (fieldName: string, formikProps: FormikValues) => {
+export const getFieldError = (fieldName: string, formikProps: FormikValues, checkTouched: boolean = true) => {
     const fieldError = get(formikProps, `errors.${fieldName}`);
     const isTouched = get(formikProps, `touched.${fieldName}`);
-    if (!isTouched && formikProps.submitCount < 1)
-        return '';
+    if (formikProps.submitCount < 1)
+        if (checkTouched && !isTouched)
+            return '';
     return fieldError;
 }
 

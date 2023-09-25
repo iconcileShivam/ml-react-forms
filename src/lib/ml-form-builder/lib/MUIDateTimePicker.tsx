@@ -6,6 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { FormikValues } from 'formik';
 import { get } from 'lodash';
 import { IFieldProps } from '..';
+import { DateTimePicker, DateTimePickerProps } from '@mui/x-date-pickers';
 
 export interface IMUIDatePickerProps extends DatePickerProps<any> {
     outputFormat?: string
@@ -83,3 +84,48 @@ export const MUITimePicker: React.FC<IFieldProps & { fieldProps?: IMUITimePicker
     )
 }
 
+export interface IMUIDateTimePickerProps extends DateTimePickerProps<any> {
+    outputFormat?: string
+    name?: string
+}
+
+
+export const MUIDateTimePicker: React.FC<IFieldProps & { fieldProps?: IMUIDateTimePickerProps }> = props => {
+    const { fieldProps = {} as IMUIDateTimePickerProps, formikProps = {} as FormikValues } = props;
+    const value = get(formikProps, `values.${fieldProps.name}`);
+    //const [selectedDate, setSelectedDate] = React.useState<MaterialUiPickersDate | null>(initValue ? initValue : null);
+    const fieldError = get(formikProps, `errors.${fieldProps.name}`);
+    const { outputFormat, ...datePickerProps } = fieldProps;
+    const defaultFormat = 'MM/DD/YYYY HH:mmA'
+    const handleDateChange = (datetime: any | null) => {
+        //setSelectedDate(date);
+        if (!datetime) {
+            formikProps.setFieldValue(fieldProps.name, datetime, false);
+            return;
+        }
+        const dateValue = (outputFormat === 'date') ? datetime : datetime.format(outputFormat || fieldProps.format || defaultFormat);
+        formikProps.setFieldValue(fieldProps.name, dateValue, false);
+    };
+    const updatedProps = {
+        ...datePickerProps,
+        error: !!fieldError,
+        helperText: (fieldError || ''),
+        onChange: handleDateChange,
+        value: (!value) ? null : value,
+        inputValue: (!value) ? '' : value,
+        format: fieldProps.format || defaultFormat,
+
+        onError: (error: React.ReactNode) => {
+            // handle as a side effect
+            if (error !== fieldError) {
+                formikProps.setFieldError(fieldProps.name, error);
+            }
+        }
+    };
+
+    return (
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DateTimePicker {...updatedProps} />
+        </LocalizationProvider>
+    )
+}
