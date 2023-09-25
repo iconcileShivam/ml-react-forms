@@ -8,4 +8,4 @@ export declare type MenuOptionObject = {
 };
 export declare type MenuOptions = Array<string> | Array<MenuOptionObject>;
 export declare const getMenuOptions: (options: MenuOptions) => MenuOptionObject[];
-export declare const getFieldError: (fieldName: string, formikProps: FormikValues) => any;
+export declare const getFieldError: (fieldName: string, formikProps: FormikValues, checkTouched?: boolean) => any;

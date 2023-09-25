@@ -19,6 +19,7 @@ var DatePicker = require('@mui/x-date-pickers/DatePicker');
 var TimePicker = require('@mui/x-date-pickers/TimePicker');
 var AdapterDayjs = require('@mui/x-date-pickers/AdapterDayjs');
 var LocalizationProvider = require('@mui/x-date-pickers/LocalizationProvider');
+var xDatePickers = require('@mui/x-date-pickers');
 var Autocomplete = _interopDefault(require('@mui/material/Autocomplete'));
 var Highlighter = _interopDefault(require('react-highlight-words'));
 var formik = require('formik');
@@ -119,11 +120,13 @@ var getMenuOptions = function (options) {
         return item;
     });
 };
-var getFieldError = function (fieldName, formikProps) {
+var getFieldError = function (fieldName, formikProps, checkTouched) {
+    if (checkTouched === void 0) { checkTouched = true; }
     var fieldError = _.get(formikProps, "errors." + fieldName);
     var isTouched = _.get(formikProps, "touched." + fieldName);
-    if (!isTouched && formikProps.submitCount < 1)
-        return '';
+    if (formikProps.submitCount < 1)
+        if (checkTouched && !isTouched)
+            return '';
     return fieldError;
 };
 
@@ -347,6 +350,31 @@ var MUITimePicker = function (props) {
             }
         } });
     return (React.createElement(TimePicker.TimePicker, __assign({}, updatedProps)));
+};
+var MUIDateTimePicker = function (props) {
+    var _a = props.fieldProps, fieldProps = _a === void 0 ? {} : _a, _b = props.formikProps, formikProps = _b === void 0 ? {} : _b;
+    var value = _.get(formikProps, "values." + fieldProps.name);
+    //const [selectedDate, setSelectedDate] = React.useState<MaterialUiPickersDate | null>(initValue ? initValue : null);
+    var fieldError = _.get(formikProps, "errors." + fieldProps.name);
+    var outputFormat = fieldProps.outputFormat, datePickerProps = __rest(fieldProps, ["outputFormat"]);
+    var defaultFormat = 'MM/DD/YYYY HH:mmA';
+    var handleDateChange = function (datetime) {
+        //setSelectedDate(date);
+        if (!datetime) {
+            formikProps.setFieldValue(fieldProps.name, datetime, false);
+            return;
+        }
+        var dateValue = (outputFormat === 'date') ? datetime : datetime.format(outputFormat || fieldProps.format || defaultFormat);
+        formikProps.setFieldValue(fieldProps.name, dateValue, false);
+    };
+    var updatedProps = __assign(__assign({}, datePickerProps), { error: !!fieldError, helperText: (fieldError || ''), onChange: handleDateChange, value: (!value) ? null : value, inputValue: (!value) ? '' : value, format: fieldProps.format || defaultFormat, onError: function (error) {
+            // handle as a side effect
+            if (error !== fieldError) {
+                formikProps.setFieldError(fieldProps.name, error);
+            }
+        } });
+    return (React.createElement(LocalizationProvider.LocalizationProvider, { dateAdapter: AdapterDayjs.AdapterDayjs },
+        React.createElement(xDatePickers.DateTimePicker, __assign({}, updatedProps))));
 };
 
 var TIME_BETWEEN_REQS = 300;
@@ -805,6 +833,7 @@ attachField('autocomplete', React.createElement(MUIAutocomplete, null));
 attachField('array', React.createElement(MUIFieldArray, null));
 attachField('time-picker-select', React.createElement(MUIDropDownTimePicker, null));
 attachField('phone', React.createElement(MUIPhoneField, null));
+attachField('phone', React.createElement(MUIDateTimePicker, null));
 var BuildFormRow = function (props) {
     var schema = props.schema, rowId = props.rowId, _a = props.formikProps, formikProps = _a === void 0 ? {} : _a, _b = props.settings, settings = _b === void 0 ? { horizontalSpacing: 10, verticalSpacing: 10, columnHorizontalPadding: 0, isReadOnly: false } : _b;
     var columnItems = _.get(schema, 'columns');
