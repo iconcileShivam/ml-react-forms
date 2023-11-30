@@ -1,7 +1,5 @@
 import React from 'react';
-import { makeStyles, createStyles } from '@mui/styles';
 import _ from 'lodash';
-import { Theme } from '@mui/system';
 
 interface MUIFileInputProps {
 	disabled?: boolean
@@ -24,7 +22,6 @@ export interface IFile {
 
 export const MUIFileInput: React.FC<MUIFileInputProps> = (props: MUIFileInputProps) => {
 	const { multiple, accept, disableDefaultTooltip, invisible, disabled, onChange, inputProps = {} } = props
-	const classes = useStyles();
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const selectedFiles = event.target.files
 		if (selectedFiles) {
@@ -55,7 +52,7 @@ export const MUIFileInput: React.FC<MUIFileInputProps> = (props: MUIFileInputPro
 	return (
 		<input type="file" disabled={disabled}
 			multiple={multiple}
-			className={invisible ? classes.invisibleInput : ""}
+			style={invisible ? { opacity: 0, width: '100%', position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, cursor: 'pointer' } : {}}
 			title={disableDefaultTooltip ? " " : undefined}
 			accept={accept}
 			onChange={handleChange}
@@ -63,7 +60,3 @@ export const MUIFileInput: React.FC<MUIFileInputProps> = (props: MUIFileInputPro
 		/>
 	)
 }
-
-const useStyles = makeStyles<Theme>(() => createStyles({
-	invisibleInput: { opacity: 0, width: '100%', position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, cursor: 'pointer' }
-}))

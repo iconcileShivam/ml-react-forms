@@ -1,6 +1,6 @@
-/// <reference types="react" />
 import { InputBaseComponentProps } from '@mui/material';
 import { AutocompleteProps, AutocompleteRenderInputParams } from '@mui/material/Autocomplete';
+import * as React from 'react';
 import { IFieldProps } from '..';
 export interface IHighlighterProps {
     highlightText?: boolean;
@@ -28,4 +28,4 @@ export interface IMUIAutoCompleteProps<T> extends Partial<AutocompleteProps<T, b
 export interface IProps<T> extends IFieldProps {
     fieldProps?: IMUIAutoCompleteProps<T>;
 }
-export declare function MUIAutocomplete<T>(props: IProps<T>): JSX.Element;
+export declare function MUIAutocomplete<T>(props: IProps<T>): React.JSX.Element;

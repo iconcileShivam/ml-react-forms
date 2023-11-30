@@ -13,7 +13,7 @@ export interface FormConfig {
     flex?: number | string;
     fieldProps?: object;
     styles?: object;
-    classNames?: Array<string>;
+    classNames?: Array<string> | string;
     condition?: TFieldConditions;
     readOnlyProps?: ReadOnlyProps;
 }
@@ -25,7 +25,7 @@ interface RowSettingsProps {
 export interface BuilderSettingsProps extends RowSettingsProps {
     isReadOnly?: boolean;
 }
-export declare type RowSchema = Array<FormConfig> | FormConfig | {
+export type RowSchema = Array<FormConfig> | FormConfig | {
     columns: Array<FormConfig>;
     settings?: RowSettingsProps;
 };
@@ -35,7 +35,7 @@ export interface FormRowProps {
     formikProps?: FormikValues;
     settings?: BuilderSettingsProps;
 }
-declare type submitButtonLayout = "right" | "center" | "fullWidth";
+type submitButtonLayout = "right" | "center" | "fullWidth";
 export interface IFormActionProps {
     submitButtonText?: string;
     submitButtonProps?: LoadingButtonProps;
@@ -61,8 +61,8 @@ export declare const getComponentConfig: (type: string) => {
     component: JSX.Element;
     props?: object | undefined;
 };
-export declare const attachField: (type: string | string[], component: JSX.Element, props?: object | undefined) => void;
-export declare const setDefaultProps: (type: string | string[], props: object) => void;
+export declare const attachField: (type: Array<string> | string, component: JSX.Element, props?: object) => void;
+export declare const setDefaultProps: (type: Array<string> | string, props: object) => void;
 export declare const BuildFormRow: React.FC<FormRowProps>;
 export declare const MLFormContent: React.FC<BuilderProps>;
 export declare const MLFormAction: React.FC<IFormActionProps & Pick<BuilderProps, 'formId' | 'formikProps'>>;

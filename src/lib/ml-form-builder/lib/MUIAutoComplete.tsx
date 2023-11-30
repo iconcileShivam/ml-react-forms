@@ -179,7 +179,7 @@ export function MUIAutocomplete<T>(props: IProps<T>) {
         }
     }
 
-    const defaultRenderOptions = (option: T, { inputValue = '' }: AutocompleteRenderOptionState) => {
+    const defaultRenderOptions = (_: any, option: T, { inputValue = '' }: AutocompleteRenderOptionState) => {
         /*THIS WILL BE USED TO RENDER OPTION AND HIGHLIGHT IF USER DOESN'T PROVIDE ANY RENDER OPTIONS */
         return (
             <div>

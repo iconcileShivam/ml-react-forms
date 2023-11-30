@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { map, isArray, uniqueId, get, isFunction, filter } from 'lodash';
-import { createStyles, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { styled } from '@mui/styles';
 import { FormikValues } from 'formik';
 import { MUITextField, MUISelectField, MUICheckBox, MUISwitch, MUIRadio, MUIPlaceSuggest, MUIAutocomplete, MUIFieldArray, MUIDropDownTimePicker, MUIPhoneField } from './lib';
 import { MUIDatePicker, MUIDateTimePicker, MUITimePicker } from './lib/MUIDateTimePicker';
 import { getConditionalProps, TFieldConditions } from './lib/ConditionalOperation';
-import { Theme } from '@mui/system';
 import { LoadingButton, LoadingButtonProps } from '@mui/lab';
 
 
@@ -24,7 +22,7 @@ export interface FormConfig {
     flex?: number | string
     fieldProps?: object
     styles?: object
-    classNames?: Array<string>,
+    classNames?: Array<string> | string,
     condition?: TFieldConditions
     readOnlyProps?: ReadOnlyProps
 }
@@ -111,11 +109,10 @@ attachField('phone', <MUIDateTimePicker />)
 
 export const BuildFormRow: React.FC<FormRowProps> = props => {
     const { schema, rowId, formikProps = {}, settings = { horizontalSpacing: 10, verticalSpacing: 10, columnHorizontalPadding: 0, isReadOnly: false } } = props;
-    let columnItems = get(schema, 'columns') as Array<FormConfig>;
-    let rowSettings = { ...settings, ...get(schema, 'settings') } as RowSettingsProps;
+    let columnItems = (get(schema, 'columns') || []) as Array<FormConfig>;
+    let rowSettings = { ...settings, ...(get(schema, 'settings') || {}) } as RowSettingsProps;
     const colItems = (isArray(schema) ? schema : ((isArray(columnItems) ? columnItems : [schema])));
-    const classes = useFormStyles();
-    const rowStyle = { marginBottom: (rowSettings.verticalSpacing || 10) };
+    const rowStyle = { marginBottom: (rowSettings.verticalSpacing || 10), display: 'flex' };
 
     const doNotHaveMoreElements = (index: number): boolean => {
         return filter(colItems.slice(index + 1), (item: FormConfig) => {
@@ -126,7 +123,7 @@ export const BuildFormRow: React.FC<FormRowProps> = props => {
     }
 
     return (
-        <div className={classes.row} style={rowStyle}>
+        <div style={rowStyle}>
             {
                 map(colItems, (item: FormConfig, index) => {
                     const componentConfig = ComponentMapConfig[item.type];
@@ -140,7 +137,7 @@ export const BuildFormRow: React.FC<FormRowProps> = props => {
                     if (conditionalProps.hidden === true)
                         return null;
                     return (
-                        <div key={`${rowId}_field_${index}`} className={clsx(item.classNames, classes.column)} style={
+                        <div key={`${rowId}_field_${index}`} className={item.classNames as string} style={
                             {
                                 flex: (item.flex || 1),
                                 marginRight: horizontalSpacing,
@@ -190,15 +187,28 @@ export const MLFormContent: React.FC<BuilderProps> = props => {
         </>
     )
 }
-
 export const MLFormAction: React.FC<IFormActionProps & Pick<BuilderProps, 'formId' | 'formikProps'>> = (props) => {
     const { formId, formikProps = {} as FormikValues, containerClassNames, submitButtonLayout = 'center', submitButtonText = "Submit", submitButtonProps } = props;
-    const classes = useFormStyles();
     if (props.actionContent)
         return (React.cloneElement(props.actionContent || <div />, { formikProps }));
-    const layoutClassName = `action-${submitButtonLayout}`;
+
+    const ActionContainer = styled('div')(() => ({
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        ...(submitButtonLayout === 'center' && {
+            justifyContent: 'center'
+        }),
+        ...(submitButtonLayout === 'right' && {
+            justifyContent: 'flex-end'
+        }),
+        '&.action-fullWidth > button': {
+            flex: 1
+        }
+    }));
+
     return (
-        <div className={clsx(classes.actionContainer, layoutClassName, containerClassNames)}>
+        <ActionContainer className={containerClassNames as string}>
             {
                 (props.actionContent) ?
                     (React.cloneElement(props.actionContent || <div />, { formikProps, formId }))
@@ -207,7 +217,7 @@ export const MLFormAction: React.FC<IFormActionProps & Pick<BuilderProps, 'formI
                     )
             }
 
-        </div>
+        </ActionContainer>
     )
 }
 
@@ -230,35 +240,5 @@ export const MLFormBuilder: React.FC<BuilderProps> = props => {
     )
 }
 
-
-const useFormStyles = makeStyles<Theme>(() => {
-    return (createStyles({
-        row: {
-            display: 'flex'
-        },
-        column: {},
-        actionContainer: {
-            position: 'relative',
-            display: 'flex',
-            justifyContent: 'center',
-            '&.action-center': {
-                justifyContent: 'center'
-            },
-            '&.action-right': {
-                justifyContent: 'flex-end'
-            },
-            '&.action-fullWidth > button': {
-                flex: 1
-            }
-        },
-        submitLoader: {
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%,-50%)',
-            marginTop: -5
-        }
-    }))
-})
 
 export default MLFormBuilder;

@@ -21,7 +21,7 @@ export interface PlacesAutocompleteChildrenProps {
         disabled: boolean;
         onKeyDown: React.KeyboardEventHandler;
         onBlur: React.FocusEventHandler;
-        value: string | undefined;
+        // value: string | undefined;
         onChange: (ev: { target: { value: string } }) => void;
     } & InputProps;
     getSuggestionItemProps: <SuggestionProps extends {}>(suggestion: Suggestion, options?: SuggestionProps) => {
@@ -106,7 +106,7 @@ const SearchField: React.FC<ISearchFieldProps> = props => {
     };
     return (
         <div>
-            <TextField value={address || ''}    {...placeAutocompleteProps.getInputProps({
+            <TextField value={address || ''}  {...placeAutocompleteProps.getInputProps({
                 label: textFieldProps.label || 'Search Places',
                 className: 'location-search-input',
                 onBlur: formikProps.handleBlur
@@ -131,7 +131,7 @@ const PlaceList: React.FC<IPlaceListProps> = props => {
                         // inline style for demonstration purpose
                         const style = { cursor: 'pointer' };
                         return (
-                            <ListItem disableGutters={true} dense={true} selected={suggestion.active} key={suggestion.placeId} {...getSuggestionItemProps(suggestion, {
+                            <ListItem disableGutters={true} dense={true} selected={suggestion.active} {...getSuggestionItemProps(suggestion, {
                                 className,
                                 style
                             })} {...{ ...listItemProps }} >

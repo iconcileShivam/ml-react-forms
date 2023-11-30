@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Suggestion, PropTypes } from 'react-places-autocomplete';
 import { IFieldProps } from '../index';
 import { TextFieldProps, ListProps, ListItemProps } from '@mui/material';
-declare type IListItemProps = Omit<ListItemProps, 'button'>;
+type IListItemProps = Omit<ListItemProps, 'button'>;
 export interface PlacesAutocompleteChildrenProps {
     loading: boolean;
     suggestions: ReadonlyArray<Suggestion>;
@@ -16,7 +16,6 @@ export interface PlacesAutocompleteChildrenProps {
         disabled: boolean;
         onKeyDown: React.KeyboardEventHandler;
         onBlur: React.FocusEventHandler;
-        value: string | undefined;
         onChange: (ev: {
             target: {
                 value: string;

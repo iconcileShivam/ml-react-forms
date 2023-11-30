@@ -2,11 +2,9 @@ import React from 'react';
 import { IFieldProps } from '../index';
 import { FieldArray, FormikValues } from 'formik';
 import { get } from 'lodash';
-import { IconButton, Button, ButtonProps, IconButtonProps, TextFieldProps } from '@mui/material';
-import { createStyles, makeStyles } from '@mui/styles';
+import { IconButton, Button, ButtonProps, IconButtonProps, TextFieldProps, Box } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { getComponentConfig } from '../index';
-import { Theme } from '@mui/system';
 
 interface IFieldArrayProps {
     name: string
@@ -46,7 +44,6 @@ export const MUIFieldArray: React.FC<IProps> = (props) => {
     const { itemType, addButtonText = 'Add', addButtonProps, addButton, removeButton, removeButtonProps, textFieldProps = {}, defaultData = {} } = fieldProps;
     const values = get(formikProps, `values.${fieldProps.name}`);
     const itemComponentConfig = getComponentConfig(itemType);
-    const classes = useStyles();
 
 
 
@@ -56,15 +53,20 @@ export const MUIFieldArray: React.FC<IProps> = (props) => {
                 <div>
                     {
                         (values || []).map((value: any, index: number) => (
-                            <div key={`${fieldProps.name}-${index}`} className={classes.arrayItem}>
+                            <Box key={`${fieldProps.name}-${index}`} position={'relative'}>
                                 {React.cloneElement(itemComponentConfig.component, { name: fieldProps.name, itemIndex: index, arrayHelpers, fieldValue: value, formikProps, ...itemComponentConfig.props, ...textFieldProps })}
                                 {
                                     (removeButton) ? removeButton : (
-                                        <IconButton className={classes.arrayRemoveIcon} size="small" onClick={() => arrayHelpers.remove(index)} {...removeButtonProps}><CloseIcon /></IconButton>
+                                        <IconButton sx={{
+                                            position: 'absolute',
+                                            right: 0,
+                                            top: '50%',
+                                            transform: 'translate(0,-50%)'
+                                        }} size="small" onClick={() => arrayHelpers.remove(index)} {...removeButtonProps}><CloseIcon /></IconButton>
                                     )
                                 }
 
-                            </div>
+                            </Box>
                         ))
                     }
                     <div>
@@ -77,17 +79,3 @@ export const MUIFieldArray: React.FC<IProps> = (props) => {
         />
     )
 }
-
-const useStyles = makeStyles<Theme>(() => {
-    return (createStyles({
-        arrayItem: {
-            position: 'relative'
-        },
-        arrayRemoveIcon: {
-            position: 'absolute',
-            right: 0,
-            top: '50%',
-            transform: 'translate(0,-50%)'
-        }
-    }))
-})

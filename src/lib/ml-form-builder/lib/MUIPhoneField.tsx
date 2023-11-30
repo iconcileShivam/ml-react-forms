@@ -11,15 +11,12 @@ import {
   TextFieldProps,
   Typography
 } from "@mui/material";
-import { createStyles } from "@mui/styles";
-import { makeStyles } from "@mui/styles";
 import { FormikValues } from "formik";
 import { get } from "lodash";
 import React, { FC, useEffect, useState } from "react";
 import { IFieldProps } from "..";
 import { getFieldError } from "../Utils";
 import { COUNTRY_LIST } from "./Constants";
-import { Theme } from '@mui/system';
 
 
 export interface IMUIPhoneFieldProps {
@@ -46,7 +43,6 @@ export const MUIPhoneField: FC<MUIPhoneFieldProps> = (props) => {
     fieldConfig,
   } = props;
   const [code, setCode] = useState<string>("");
-  const classes = useStyles();
   const value = (get(formikProps, `values.${fieldProps.name}`) || "") as string;
   useEffect(() => {
     if (value) {
@@ -129,7 +125,6 @@ export const MUIPhoneField: FC<MUIPhoneFieldProps> = (props) => {
             value={value.split("-")[1] || ""}
             error={error}
             onChange={onChange}
-            className={classes.tf}
             {...phoneNumberProps}
           ></TextField>
         </Box>
@@ -137,7 +132,12 @@ export const MUIPhoneField: FC<MUIPhoneFieldProps> = (props) => {
       {error && (
         <Typography
           variant="overline"
-          className={newError ? classes.errorField : ""}
+          style={newError ? {
+            color: "#B71840",
+            fontSize: 12,
+            fontWeight: "bold",
+            textTransform: "none",
+          } : {}}
         >
           {newError}
         </Typography>
@@ -145,19 +145,4 @@ export const MUIPhoneField: FC<MUIPhoneFieldProps> = (props) => {
     </>
   );
 };
-
-const useStyles = makeStyles<Theme>(() => {
-  return createStyles({
-    errorField: {
-      color: "#B71840",
-      fontSize: 12,
-      fontWeight: "bold",
-      textTransform: "none",
-    },
-    tf: {
-
-    }
-  });
-});
-
 export default MUIPhoneField;
