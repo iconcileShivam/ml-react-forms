@@ -41,4 +41,3 @@ export var MUIFileInput = function (props) {
     };
     return (React.createElement("input", __assign({ type: "file", disabled: disabled, multiple: multiple, style: invisible ? { opacity: 0, width: '100%', position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, cursor: 'pointer' } : {}, title: disableDefaultTooltip ? " " : undefined, accept: accept, onChange: handleChange }, inputProps)));
 };
-//# sourceMappingURL=MUIFileInput.js.map

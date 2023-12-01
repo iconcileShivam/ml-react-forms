@@ -123,4 +123,3 @@ export var MLFormBuilder = function (props) {
             (React.createElement(MLFormAction, __assign({ formId: props.formId, formikProps: formikProps }, actionConfig)))));
 };
 export default MLFormBuilder;
-//# sourceMappingURL=index.js.map

@@ -12,4 +12,3 @@ export { MUIReadOnly } from './MUIReadOnly';
 export { MUIFileInput } from './MUIFileInput';
 export { MUIPhoneField } from './MUIPhoneField';
 export * from './Constants';
-//# sourceMappingURL=index.js.map

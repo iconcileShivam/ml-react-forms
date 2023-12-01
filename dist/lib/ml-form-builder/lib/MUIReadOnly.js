@@ -6,4 +6,3 @@ export var MUIReadOnly = function (props) {
         React.createElement(Typography, null, props.value || 'NA')));
 };
 export default MUIReadOnly;
-//# sourceMappingURL=MUIReadOnly.js.map

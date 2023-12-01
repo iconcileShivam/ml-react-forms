@@ -47,4 +47,3 @@ export var MUIFieldArray = function (props) {
                     React.createElement(CloseIcon, null))))); }),
             React.createElement("div", null, (addButton) ? addButton : (React.createElement(Button, __assign({ type: "button", onClick: function () { return arrayHelpers.push(defaultData); } }, addButtonProps), addButtonText))))); } }));
 };
-//# sourceMappingURL=MUIFieldArray.js.map

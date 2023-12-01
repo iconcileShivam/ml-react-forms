@@ -93,4 +93,3 @@ export var MUIDateTimePicker = function (props) {
     return (React.createElement(LocalizationProvider, { dateAdapter: AdapterDayjs },
         React.createElement(DateTimePicker, __assign({}, updatedProps))));
 };
-//# sourceMappingURL=MUIDateTimePicker.js.map

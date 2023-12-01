@@ -147,4 +147,3 @@ export var MUIPlaceSuggest = function (props) {
     return (React.createElement("div", { style: { position: 'relative' } },
         React.createElement(PlacesAutocomplete, __assign({ value: address, onChange: handleChange, onSelect: handleSelect }, placeAutocompleteProps), function (placeCompleteProps) { return (React.createElement(FieldLayout, __assign({ placeAutocompleteProps: placeCompleteProps, resetField: resetField, currentAddress: address, selectedValue: selectedValue, formikProps: formikProps }, fieldLayoutProps))); })));
 };
-//# sourceMappingURL=MUIPlaceSuggest.js.map

@@ -3,4 +3,3 @@
 test("create a new hello", () => {
     expect(testMethod("World")).toBe("Hello World");
 }); */ 
-//# sourceMappingURL=function.spec.js.map

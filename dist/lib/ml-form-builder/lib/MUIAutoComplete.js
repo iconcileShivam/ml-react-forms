@@ -243,4 +243,3 @@ export function MUIAutocomplete(props) {
                     loading ? React.createElement(CircularProgress, { color: "primary", size: 20 }) : null,
                     params.InputProps.endAdornment)) }), renderInputProps.InputProps || {}), inputProps: __assign(__assign(__assign({}, params.inputProps), inputProps), { autoComplete: 'new-password' }) })); } }, multipleProp, autoCompleteProps));
 }
-//# sourceMappingURL=MUIAutoComplete.js.map

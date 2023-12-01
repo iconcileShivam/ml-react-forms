@@ -40,4 +40,3 @@ export var MUIRadio = function (props) {
         (fieldError || helperText) &&
             (React.createElement(FormHelperText, __assign({}, formHelperTextProps), fieldError || helperText))));
 };
-//# sourceMappingURL=MUIRadio.js.map

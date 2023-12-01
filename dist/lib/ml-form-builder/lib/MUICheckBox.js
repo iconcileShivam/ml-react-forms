@@ -38,4 +38,3 @@ export var MUICheckBox = function (props) {
         (fieldError || helperText) &&
             (React.createElement(FormHelperText, __assign({}, formHelperTextProps), fieldError || helperText))));
 };
-//# sourceMappingURL=MUICheckBox.js.map
