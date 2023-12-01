@@ -68,7 +68,7 @@ export const MUIPhoneField: FC<MUIPhoneFieldProps> = (props) => {
     let number = event.target.value.replace("-", "");
     formikProps.setFieldValue(`${fieldProps.name}`, `${code}-${number}`);
   };
-  const codeChange = (e: SelectChangeEvent<{ value: unknown }>) => {
+  const codeChange = (e: SelectChangeEvent<unknown>) => {
     let number = value.split("-");
     formikProps.setFieldValue(`${fieldProps.name}`, `${e.target.value as string}-${number[1] || ''}`);
     setCode(e.target.value as string);

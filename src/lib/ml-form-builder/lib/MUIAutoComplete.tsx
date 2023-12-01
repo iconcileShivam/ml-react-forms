@@ -205,6 +205,7 @@ export function MUIAutocomplete<T>(props: IProps<T>) {
     }
     const multipleProp = multiple ? { multiple: true as true } : {};
     return <Autocomplete
+        // @ts-ignore
         onChange={onItemSelect}
         onInputChange={onInputChange}
         getOptionLabel={getOptionLabel}
@@ -213,6 +214,7 @@ export function MUIAutocomplete<T>(props: IProps<T>) {
         onClose={() => { setOpen(false) }}
         options={options.length > 0 ? options : defaultOptions}
         isOptionEqualToValue={idKey ? (option: any, value: any) => option[idKey] === value[idKey] : undefined}
+        // @ts-ignore
         renderOption={defaultRenderOptions}
         id={fieldConfig.valueKey}
         disableClearable={clearOnSelect}
