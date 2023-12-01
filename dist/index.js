@@ -972,4 +972,3 @@ exports.attachField = attachField;
 exports.default = index;
 exports.getComponentConfig = getComponentConfig;
 exports.setDefaultProps = setDefaultProps;
-//# sourceMappingURL=index.js.map
