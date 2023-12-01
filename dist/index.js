@@ -4,7 +4,6 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var React = require('react');
 var _ = require('lodash');
-var styles = require('@mui/styles');
 var TextField = require('@mui/material/TextField');
 var Typography = require('@mui/material/Typography');
 var material = require('@mui/material');
@@ -21,6 +20,7 @@ var formik = require('formik');
 var CloseIcon = require('@mui/icons-material/Close');
 var moment = require('moment');
 var lab = require('@mui/lab');
+var styled = require('@emotion/styled');
 
 function _interopNamespaceDefault(e) {
     var n = Object.create(null);
@@ -918,7 +918,7 @@ var MLFormAction = function (props) {
     var formId = props.formId, _a = props.formikProps, formikProps = _a === void 0 ? {} : _a, containerClassNames = props.containerClassNames, _b = props.submitButtonLayout, submitButtonLayout = _b === void 0 ? 'center' : _b, _c = props.submitButtonText, submitButtonText = _c === void 0 ? "Submit" : _c, submitButtonProps = props.submitButtonProps;
     if (props.actionContent)
         return (React__namespace.cloneElement(props.actionContent || React__namespace.createElement("div", null), { formikProps: formikProps }));
-    var ActionContainer = styles.styled('div')(function () { return (__assign(__assign(__assign({ position: 'relative', display: 'flex', justifyContent: 'center' }, (submitButtonLayout === 'center' && {
+    var ActionContainer = styled('div')(function () { return (__assign(__assign(__assign({ position: 'relative', display: 'flex', justifyContent: 'center' }, (submitButtonLayout === 'center' && {
         justifyContent: 'center'
     })), (submitButtonLayout === 'right' && {
         justifyContent: 'flex-end'
