@@ -1,13 +1,13 @@
 import { FormikValues } from "formik";
 import { FormConfig } from "../..";
-export declare type TFieldConditions = {
+export type TFieldConditions = {
     hidden?: boolean;
     logicOpn?: string;
     defaultProps?: object;
     postEffectProps?: object;
     values?: ConditionCompareItem[];
 };
-declare type compareValueType = string | number | boolean;
+type compareValueType = string | number | boolean;
 interface ConditionCompareItem {
     key: string;
     compareValue: compareValueType;

@@ -26,24 +26,25 @@ export var MUITextField = function (props) {
 };
 export default React.memo(MUITextField, (function (p, n) {
     var _a, _b, _c, _d;
+    p.fieldProps.id = '1';
+    n.fieldProps.id = '1';
     var pFieldName = ((_a = p.fieldProps) === null || _a === void 0 ? void 0 : _a.name) || '';
     var nFieldName = ((_b = n.fieldProps) === null || _b === void 0 ? void 0 : _b.name) || '';
     // ========== Checking for getFieldError
-    // Field Error
-    if (!isEqual(get(p.formikProps, "errors.".concat(pFieldName)), get(n.formikProps, "errors.".concat(nFieldName)))) {
+    // Field Value
+    if (!isEqual(get(p.formikProps, "values.".concat(pFieldName)), get(n.formikProps, "values.".concat(nFieldName)))) {
         return false;
     }
-    // formikProps.submitCount
-    if (!isEqual((_c = p.formikProps) === null || _c === void 0 ? void 0 : _c.submitCount, (_d = n.formikProps) === null || _d === void 0 ? void 0 : _d.submitCount)) {
+    // Field Error
+    if (!isEqual(get(p.formikProps, "errors.".concat(pFieldName)), get(n.formikProps, "errors.".concat(nFieldName)))) {
         return false;
     }
     // get(formikProps, `touched.${fieldName}`)
     if (!isEqual(get(p.formikProps, "touched.".concat(pFieldName)), get(n.formikProps, "touched.".concat(nFieldName)))) {
         return false;
     }
-    // ========== Checking for other props
-    // Field Value
-    if (!isEqual(get(p.formikProps, "values.".concat(pFieldName)), get(n.formikProps, "values.".concat(nFieldName)))) {
+    // formikProps.submitCount
+    if (!isEqual((_c = p.formikProps) === null || _c === void 0 ? void 0 : _c.submitCount, (_d = n.formikProps) === null || _d === void 0 ? void 0 : _d.submitCount)) {
         return false;
     }
     // Readonly Prop

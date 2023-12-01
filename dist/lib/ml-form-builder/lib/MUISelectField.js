@@ -22,9 +22,9 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import * as React from 'react';
 import { Select, FormControl, FormHelperText, MenuItem, InputLabel } from '@mui/material';
-import { get, map, isString } from 'lodash';
+import { get, map, isString, isEqual } from 'lodash';
 import { getMenuOptions, getFieldError } from '../Utils';
-export var MUISelectField = function (props) {
+export var MUISelectField = React.memo(function (props) {
     var _a = props.fieldConfig, fieldConfig = _a === void 0 ? {} : _a, _b = props.formikProps, formikProps = _b === void 0 ? {} : _b, _c = props.fieldProps, fieldProps = _c === void 0 ? {} : _c;
     var label = fieldProps.label, _d = fieldProps.options, options = _d === void 0 ? [] : _d, emptyItem = fieldProps.emptyItem, helperText = fieldProps.helperText, formControlProps = fieldProps.formControlProps, formHelperTextProps = fieldProps.formHelperTextProps, _e = fieldProps.emptyMenuItemProps, emptyMenuItemProps = _e === void 0 ? {} : _e, _f = fieldProps.menuItemProps, menuItemProps = _f === void 0 ? {} : _f, _g = fieldProps.inputLabelProps, inputLabelProps = _g === void 0 ? {} : _g, _h = fieldProps.hasObjectValue, hasObjectValue = _h === void 0 ? false : _h, selectProps = __rest(fieldProps, ["label", "options", "emptyItem", "helperText", "formControlProps", "formHelperTextProps", "emptyMenuItemProps", "menuItemProps", "inputLabelProps", "hasObjectValue"]);
     var labelId = "".concat(fieldConfig.id, "_label");
@@ -55,4 +55,36 @@ export var MUISelectField = function (props) {
             })),
         (fieldError || fieldProps.helperText) &&
             (React.createElement(FormHelperText, __assign({}, formHelperTextProps), fieldError || fieldProps.helperText))));
-};
+}, function (p, n) {
+    var _a, _b, _c, _d;
+    p.fieldProps.id = '1';
+    n.fieldProps.id = '1';
+    var pFieldName = ((_a = p.fieldProps) === null || _a === void 0 ? void 0 : _a.name) || '';
+    var nFieldName = ((_b = n.fieldProps) === null || _b === void 0 ? void 0 : _b.name) || '';
+    // ========== Checking for getFieldError
+    // Field Value
+    if (!isEqual(get(p.formikProps, "values.".concat(pFieldName)), get(n.formikProps, "values.".concat(nFieldName)))) {
+        return false;
+    }
+    // Field Error
+    if (!isEqual(get(p.formikProps, "errors.".concat(pFieldName)), get(n.formikProps, "errors.".concat(nFieldName)))) {
+        return false;
+    }
+    // get(formikProps, `touched.${fieldName}`)
+    if (!isEqual(get(p.formikProps, "touched.".concat(pFieldName)), get(n.formikProps, "touched.".concat(nFieldName)))) {
+        return false;
+    }
+    // formikProps.submitCount
+    if (!isEqual((_c = p.formikProps) === null || _c === void 0 ? void 0 : _c.submitCount, (_d = n.formikProps) === null || _d === void 0 ? void 0 : _d.submitCount)) {
+        return false;
+    }
+    // Readonly Prop
+    if (!isEqual(p.isReadOnly, n.isReadOnly)) {
+        return false;
+    }
+    // Field Props
+    if (!isEqual(p.fieldProps, n.fieldProps)) {
+        return false;
+    }
+    return true;
+});
