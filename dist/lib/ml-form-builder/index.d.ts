@@ -25,7 +25,7 @@ interface RowSettingsProps {
 export interface BuilderSettingsProps extends RowSettingsProps {
     isReadOnly?: boolean;
 }
-export type RowSchema = Array<FormConfig> | FormConfig | {
+export declare type RowSchema = Array<FormConfig> | FormConfig | {
     columns: Array<FormConfig>;
     settings?: RowSettingsProps;
 };
@@ -35,7 +35,7 @@ export interface FormRowProps {
     formikProps?: FormikValues;
     settings?: BuilderSettingsProps;
 }
-type submitButtonLayout = "right" | "center" | "fullWidth";
+declare type submitButtonLayout = "right" | "center" | "fullWidth";
 export interface IFormActionProps {
     submitButtonText?: string;
     submitButtonProps?: LoadingButtonProps;
@@ -61,7 +61,7 @@ export declare const getComponentConfig: (type: string) => {
     component: JSX.Element;
     props?: object | undefined;
 };
-export declare const attachField: (type: Array<string> | string, component: JSX.Element, props?: object) => void;
+export declare const attachField: (type: Array<string> | string, component: JSX.Element, props?: object | undefined) => void;
 export declare const setDefaultProps: (type: Array<string> | string, props: object) => void;
 export declare const BuildFormRow: React.FC<FormRowProps>;
 export declare const MLFormContent: React.FC<BuilderProps>;

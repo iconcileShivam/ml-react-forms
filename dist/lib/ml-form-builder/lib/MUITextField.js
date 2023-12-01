@@ -14,7 +14,7 @@ import TextField from '@mui/material/TextField';
 import { get, isEqual } from 'lodash';
 import { getFieldError } from '../Utils';
 import MUIReadOnly from './MUIReadOnly';
-export var MUITextField = function (props) {
+export var MUITextField = React.memo(function (props) {
     var _a;
     var _b = props.fieldProps, fieldProps = _b === void 0 ? {} : _b, _c = props.formikProps, formikProps = _c === void 0 ? {} : _c, _d = props.isReadOnly, isReadOnly = _d === void 0 ? false : _d;
     var fieldError = getFieldError((fieldProps.name || ''), formikProps);
@@ -23,8 +23,7 @@ export var MUITextField = function (props) {
         return (React.createElement(MUIReadOnly, { label: updatedProps.label, value: updatedProps.value }));
     }
     return (React.createElement(TextField, __assign({}, updatedProps)));
-};
-export default React.memo(MUITextField, (function (p, n) {
+}, function (p, n) {
     var _a, _b, _c, _d;
     p.fieldProps.id = '1';
     n.fieldProps.id = '1';
@@ -56,4 +55,4 @@ export default React.memo(MUITextField, (function (p, n) {
         return false;
     }
     return true;
-}));
+});
