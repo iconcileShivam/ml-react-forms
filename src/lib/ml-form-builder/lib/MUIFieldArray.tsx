@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { IFieldProps } from '../index';
 import { FieldArray, FormikValues } from 'formik';
 import { get } from 'lodash';
@@ -39,7 +39,7 @@ export interface IProps extends IFieldProps {
     )
 } */
 
-export const MUIFieldArray: React.FC<IProps> = (props) => {
+export const MUIFieldArray: React.FC<IProps> = memo((props) => {
     const { formikProps = {} as FormikValues, fieldProps = {} as IFieldArrayProps } = props;
     const { itemType, addButtonText = 'Add', addButtonProps, addButton, removeButton, removeButtonProps, textFieldProps = {}, defaultData = {} } = fieldProps;
     const values = get(formikProps, `values.${fieldProps.name}`);
@@ -78,4 +78,6 @@ export const MUIFieldArray: React.FC<IProps> = (props) => {
             )}
         />
     )
-}
+}, (p, n) => {
+    return true
+})

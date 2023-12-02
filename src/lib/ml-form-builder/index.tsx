@@ -109,7 +109,7 @@ attachField('phone', <MUIDateTimePicker />)
 
 export const BuildFormRow: React.FC<FormRowProps> = props => {
     const { schema, rowId, formikProps = {}, settings = { horizontalSpacing: 10, verticalSpacing: 10, columnHorizontalPadding: 0, isReadOnly: false } } = props;
-    let columnItems = (get(schema, 'columns') || []) as Array<FormConfig>;
+    let columnItems = (get(schema, 'columns'));
     let rowSettings = { ...settings, ...(get(schema, 'settings') || {}) } as RowSettingsProps;
     const colItems = (isArray(schema) ? schema : ((isArray(columnItems) ? columnItems : [schema])));
     const rowStyle = { marginBottom: (rowSettings.verticalSpacing || 10), display: 'flex' };
