@@ -28,4 +28,4 @@ export interface IMUIAutoCompleteProps<T> extends Partial<AutocompleteProps<T, b
 export interface IProps<T> extends IFieldProps {
     fieldProps?: IMUIAutoCompleteProps<T>;
 }
-export declare function MUIAutocomplete<T>(props: IProps<T>): React.JSX.Element;
+export declare const MUIAutocomplete: React.MemoExoticComponent<(<T>(props: IProps<T>) => React.JSX.Element)>;

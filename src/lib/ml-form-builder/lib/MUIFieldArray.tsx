@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { IFieldProps } from '../index';
 import { FieldArray, FormikValues } from 'formik';
-import { get } from 'lodash';
+import { get, isEqual } from 'lodash';
 import { IconButton, Button, ButtonProps, IconButtonProps, TextFieldProps, Box } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { getComponentConfig } from '../index';
@@ -79,5 +79,42 @@ export const MUIFieldArray: React.FC<IProps> = memo((props) => {
         />
     )
 }, (p, n) => {
+    p.fieldProps!.id = '1'
+    n.fieldProps!.id = '1'
+
+    const pFieldName = p.fieldProps?.name || ''
+    const nFieldName = n.fieldProps?.name || ''
+
+    // ========== Checking for getFieldError
+
+    // Field Value
+    if (!isEqual(get(p.formikProps, `values.${pFieldName}`), get(n.formikProps, `values.${nFieldName}`))) {
+        return false
+    }
+
+    // Field Error
+    if (!isEqual(get(p.formikProps, `errors.${pFieldName}`), get(n.formikProps, `errors.${nFieldName}`))) {
+        return false
+    }
+
+    // get(formikProps, `touched.${fieldName}`)
+    if (!isEqual(get(p.formikProps, `touched.${pFieldName}`), get(n.formikProps, `touched.${nFieldName}`))) {
+        return false
+    }
+
+    // formikProps.submitCount
+    if (!isEqual(p.formikProps?.submitCount, n.formikProps?.submitCount)) {
+        return false
+    }
+
+    // Readonly Prop
+    if (!isEqual(p.isReadOnly, n.isReadOnly)) {
+        return false
+    }
+
+    // Field Props
+    if (!isEqual(p.fieldProps, n.fieldProps)) {
+        return false
+    }
     return true
 })

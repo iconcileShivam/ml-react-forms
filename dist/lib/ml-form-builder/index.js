@@ -51,7 +51,7 @@ attachField('phone', React.createElement(MUIPhoneField, null));
 attachField('phone', React.createElement(MUIDateTimePicker, null));
 export var BuildFormRow = function (props) {
     var schema = props.schema, rowId = props.rowId, _a = props.formikProps, formikProps = _a === void 0 ? {} : _a, _b = props.settings, settings = _b === void 0 ? { horizontalSpacing: 10, verticalSpacing: 10, columnHorizontalPadding: 0, isReadOnly: false } : _b;
-    var columnItems = (get(schema, 'columns') || []);
+    var columnItems = (get(schema, 'columns'));
     var rowSettings = __assign(__assign({}, settings), (get(schema, 'settings') || {}));
     var colItems = (isArray(schema) ? schema : ((isArray(columnItems) ? columnItems : [schema])));
     var rowStyle = { marginBottom: (rowSettings.verticalSpacing || 10), display: 'flex' };

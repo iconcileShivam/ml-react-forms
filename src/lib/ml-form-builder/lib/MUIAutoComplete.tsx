@@ -1,7 +1,7 @@
 import { CircularProgress, InputBaseComponentProps, TextField } from '@mui/material';
 import Autocomplete, { AutocompleteProps, AutocompleteRenderInputParams, AutocompleteRenderOptionState } from '@mui/material/Autocomplete';
 import { FormikValues } from 'formik';
-import { filter, findIndex, get, isString, reduce } from 'lodash';
+import { filter, findIndex, get, isEqual, isString, reduce } from 'lodash';
 import * as React from 'react';
 import Highlighter from "react-highlight-words";
 import { FormConfig, IFieldProps } from '..';
@@ -39,7 +39,7 @@ export interface IProps<T> extends IFieldProps {
     fieldProps?: IMUIAutoCompleteProps<T>
 }
 
-export function MUIAutocomplete<T>(props: IProps<T>) {
+export const MUIAutocomplete = React.memo(function MUIAutocomplete<T>(props: IProps<T>) {
     const [query, setQuery] = React.useState<string>();
     const ref = React.useRef<HTMLDivElement | null>(null);
     const { fieldProps = {} as IMUIAutoCompleteProps<T>, formikProps = {} as FormikValues, fieldConfig = {} as FormConfig } = props
@@ -220,7 +220,7 @@ export function MUIAutocomplete<T>(props: IProps<T>) {
         disableClearable={clearOnSelect}
         value={transformValues ? transformValues(value) : value}
         renderInput={
-            params => <TextField
+            (params:any) => <TextField
                 {...params}
                 value={query}
                 ref={ref}
@@ -253,4 +253,48 @@ export function MUIAutocomplete<T>(props: IProps<T>) {
         {...multipleProp}
         {...autoCompleteProps}
     />
-}
+}, (p, n) => {
+    p.fieldConfig!.id = '1'
+    n.fieldConfig!.id = '1'
+
+    const pFieldName = p.fieldConfig?.valueKey || ''
+    const nFieldName = n.fieldConfig?.valueKey || ''
+
+    // ========== Checking for getFieldError
+
+    // Field Value
+    if (!isEqual(get(p.formikProps, `values.${pFieldName}`), get(n.formikProps, `values.${nFieldName}`))) {
+        return false
+    }
+
+    // Field Error
+    if (!isEqual(get(p.formikProps, `errors.${pFieldName}`), get(n.formikProps, `errors.${nFieldName}`))) {
+        return false
+    }
+
+    // get(formikProps, `touched.${fieldName}`)
+    if (!isEqual(get(p.formikProps, `touched.${pFieldName}`), get(n.formikProps, `touched.${nFieldName}`))) {
+        return false
+    }
+
+    // formikProps.submitCount
+    if (!isEqual(p.formikProps?.submitCount, n.formikProps?.submitCount)) {
+        return false
+    }
+
+    // Readonly Prop
+    if (!isEqual(p.isReadOnly, n.isReadOnly)) {
+        return false
+    }
+
+    // Field Props
+    if (!isEqual(p.fieldProps, n.fieldProps)) {
+        return false
+    }
+
+    if (!isEqual(p.fieldConfig, n.fieldConfig)) {
+        return false
+    }
+
+    return true
+})

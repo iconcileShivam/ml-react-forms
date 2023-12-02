@@ -24,7 +24,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -67,12 +67,12 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 };
 import { CircularProgress, TextField } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
-import { filter, findIndex, get, isString, reduce } from 'lodash';
+import { filter, findIndex, get, isEqual, isString, reduce } from 'lodash';
 import * as React from 'react';
 import Highlighter from "react-highlight-words";
 import { getFieldError } from '../Utils';
 var TIME_BETWEEN_REQS = 300;
-export function MUIAutocomplete(props) {
+export var MUIAutocomplete = React.memo(function MUIAutocomplete(props) {
     var _this = this;
     var _a = React.useState(), query = _a[0], setQuery = _a[1];
     var ref = React.useRef(null);
@@ -235,11 +235,52 @@ export function MUIAutocomplete(props) {
             React.createElement(Highlighter, { searchWords: [inputValue], textToHighlight: getOptionLabel(option), highlightStyle: __assign({ backgroundColor: highlighterProps.highlightColor }, highlighterProps.highlighterStyles) })));
     };
     var multipleProp = multiple ? { multiple: true } : {};
-    return React.createElement(Autocomplete, __assign({ onChange: onItemSelect, onInputChange: onInputChange, getOptionLabel: getOptionLabel, onOpen: function () { setOpen(true); }, open: open, onClose: function () { setOpen(false); }, options: options.length > 0 ? options : defaultOptions, isOptionEqualToValue: idKey ? function (option, value) { return option[idKey] === value[idKey]; } : undefined, renderOption: defaultRenderOptions, id: fieldConfig.valueKey, disableClearable: clearOnSelect, value: transformValues ? transformValues(value) : value, renderInput: function (params) { return React.createElement(TextField, __assign({}, params, { value: query, ref: ref, onChange: function (e) { return handleChange(e.target.value); }, 
+    return React.createElement(Autocomplete
+    // @ts-ignore
+    , __assign({ 
+        // @ts-ignore
+        onChange: onItemSelect, onInputChange: onInputChange, getOptionLabel: getOptionLabel, onOpen: function () { setOpen(true); }, open: open, onClose: function () { setOpen(false); }, options: options.length > 0 ? options : defaultOptions, isOptionEqualToValue: idKey ? function (option, value) { return option[idKey] === value[idKey]; } : undefined, 
+        // @ts-ignore
+        renderOption: defaultRenderOptions, id: fieldConfig.valueKey, disableClearable: clearOnSelect, value: transformValues ? transformValues(value) : value, renderInput: function (params) { return React.createElement(TextField, __assign({}, params, { value: query, ref: ref, onChange: function (e) { return handleChange(e.target.value); }, 
             // @ts-ignore
             fullWidth: true, error: error, helperText: fieldError }, renderInputProps, { InputProps: __assign(__assign(__assign({}, params.InputProps), { 
                 // @ts-ignore
                 endAdornment: (React.createElement(React.Fragment, null,
                     loading ? React.createElement(CircularProgress, { color: "primary", size: 20 }) : null,
                     params.InputProps.endAdornment)) }), renderInputProps.InputProps || {}), inputProps: __assign(__assign(__assign({}, params.inputProps), inputProps), { autoComplete: 'new-password' }) })); } }, multipleProp, autoCompleteProps));
-}
+}, function (p, n) {
+    var _a, _b, _c, _d;
+    p.fieldConfig.id = '1';
+    n.fieldConfig.id = '1';
+    var pFieldName = ((_a = p.fieldConfig) === null || _a === void 0 ? void 0 : _a.valueKey) || '';
+    var nFieldName = ((_b = n.fieldConfig) === null || _b === void 0 ? void 0 : _b.valueKey) || '';
+    // ========== Checking for getFieldError
+    // Field Value
+    if (!isEqual(get(p.formikProps, "values.".concat(pFieldName)), get(n.formikProps, "values.".concat(nFieldName)))) {
+        return false;
+    }
+    // Field Error
+    if (!isEqual(get(p.formikProps, "errors.".concat(pFieldName)), get(n.formikProps, "errors.".concat(nFieldName)))) {
+        return false;
+    }
+    // get(formikProps, `touched.${fieldName}`)
+    if (!isEqual(get(p.formikProps, "touched.".concat(pFieldName)), get(n.formikProps, "touched.".concat(nFieldName)))) {
+        return false;
+    }
+    // formikProps.submitCount
+    if (!isEqual((_c = p.formikProps) === null || _c === void 0 ? void 0 : _c.submitCount, (_d = n.formikProps) === null || _d === void 0 ? void 0 : _d.submitCount)) {
+        return false;
+    }
+    // Readonly Prop
+    if (!isEqual(p.isReadOnly, n.isReadOnly)) {
+        return false;
+    }
+    // Field Props
+    if (!isEqual(p.fieldProps, n.fieldProps)) {
+        return false;
+    }
+    if (!isEqual(p.fieldConfig, n.fieldConfig)) {
+        return false;
+    }
+    return true;
+});

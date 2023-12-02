@@ -2,10 +2,10 @@ import * as React from 'react';
 import { IFieldProps } from '../index';
 import { FormHelperTextProps, FormControlProps, RadioGroupProps, RadioProps, FormControlLabelProps, FormLabelProps } from '@mui/material';
 import { MenuOptionObject } from '../Utils';
-export declare type MenuOptionObj = MenuOptionObject & {
+export type MenuOptionObj = MenuOptionObject & {
     controlProps?: FormControlLabelProps;
 };
-export declare type MenuOptions = Array<string> | Array<MenuOptionObj>;
+export type MenuOptions = Array<string> | Array<MenuOptionObj>;
 export interface IMUIRadioProps {
     options?: MenuOptions;
     header?: string;
