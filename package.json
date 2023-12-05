@@ -1,6 +1,6 @@
 {
   "name": "react-forms",
-  "version": "3.0.1-beta",
+  "version": "3.0.2-beta",
   "description": "Creating declarative dynamic forms",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
