@@ -11,8 +11,14 @@ export type TFieldConditions = {
     postEffectProps?: object //Props to be returned if and only if neccessary conditions are true
     values?: ConditionCompareItem[]
 }
-type compareValueType = string | number | boolean;
+type compareValueType = string | number | boolean | null ;
 const compare = (value1: compareValueType, operator: string, value2: compareValueType) => {
+    
+    if (value1 === null || value2 === null){
+        value1 = 'null'
+        value2 = 'null'
+    }
+
     switch (operator) {
         case '>': return value1 > value2;
         case '<': return value1 < value2;

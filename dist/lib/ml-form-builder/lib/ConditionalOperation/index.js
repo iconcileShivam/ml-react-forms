@@ -1,5 +1,9 @@
 import { get, forEach, isEmpty } from "lodash";
 var compare = function (value1, operator, value2) {
+    if (value1 === null || value2 === null) {
+        value1 = 'null';
+        value2 = 'null';
+    }
     switch (operator) {
         case '>': return value1 > value2;
         case '<': return value1 < value2;
