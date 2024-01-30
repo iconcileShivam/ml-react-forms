@@ -7,7 +7,7 @@ export type TFieldConditions = {
     postEffectProps?: object;
     values?: ConditionCompareItem[];
 };
-type compareValueType = string | number | boolean | null;
+type compareValueType = string | number | boolean;
 interface ConditionCompareItem {
     key: string;
     compareValue: compareValueType;
