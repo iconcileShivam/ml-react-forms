@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { IFieldProps } from '../index';
-import { FieldArray, FormikValues } from 'formik';
+import { FieldArray, FieldArrayRenderProps, FormikValues } from 'formik';
 import { get, isEqual } from 'lodash';
 import { IconButton, Button, ButtonProps, IconButtonProps, TextFieldProps, Box } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
@@ -17,6 +17,7 @@ interface IFieldArrayProps {
     removeButtonProps?: IconButtonProps
     textFieldProps?: TextFieldProps
     defaultData?: any
+    onRemove?: (arrayHelpers:FieldArrayRenderProps, index: number) => void
 }
 export interface IProps extends IFieldProps {
     fieldProps?: IFieldArrayProps
@@ -41,11 +42,14 @@ export interface IProps extends IFieldProps {
 
 export const MUIFieldArray: React.FC<IProps> = memo((props) => {
     const { formikProps = {} as FormikValues, fieldProps = {} as IFieldArrayProps } = props;
-    const { itemType, addButtonText = 'Add', addButtonProps, addButton, removeButton, removeButtonProps, textFieldProps = {}, defaultData = {} } = fieldProps;
+    const { itemType, addButtonText = 'Add', addButtonProps, addButton, removeButton, removeButtonProps, textFieldProps = {}, defaultData = {}, onRemove } = fieldProps;
     const values = get(formikProps, `values.${fieldProps.name}`);
     const itemComponentConfig = getComponentConfig(itemType);
 
-
+    const handleRemove = (arrayHelpers:FieldArrayRenderProps, index: number) => {
+        arrayHelpers.remove(index)
+        onRemove?.(arrayHelpers, index)
+    }
 
     return (
         <FieldArray name={fieldProps.name}
@@ -62,7 +66,7 @@ export const MUIFieldArray: React.FC<IProps> = memo((props) => {
                                             right: 0,
                                             top: '50%',
                                             transform: 'translate(0,-50%)'
-                                        }} size="small" onClick={() => arrayHelpers.remove(index)} {...removeButtonProps}><CloseIcon /></IconButton>
+                                        }} size="small" onClick={() => handleRemove(arrayHelpers, index)} {...removeButtonProps}><CloseIcon /></IconButton>
                                     )
                                 }
 
