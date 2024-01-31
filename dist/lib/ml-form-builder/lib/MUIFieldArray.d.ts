@@ -1,5 +1,6 @@
 import React from 'react';
 import { IFieldProps } from '../index';
+import { FieldArrayRenderProps } from 'formik';
 import { ButtonProps, IconButtonProps, TextFieldProps } from '@mui/material';
 interface IFieldArrayProps {
     name: string;
@@ -12,6 +13,7 @@ interface IFieldArrayProps {
     removeButtonProps?: IconButtonProps;
     textFieldProps?: TextFieldProps;
     defaultData?: any;
+    onRemove?: (arrayHelpers: FieldArrayRenderProps, index: number) => void;
 }
 export interface IProps extends IFieldProps {
     fieldProps?: IFieldArrayProps;
