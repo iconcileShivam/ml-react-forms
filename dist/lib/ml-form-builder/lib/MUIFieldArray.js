@@ -32,9 +32,13 @@ import { getComponentConfig } from '../index';
 } */
 export var MUIFieldArray = memo(function (props) {
     var _a = props.formikProps, formikProps = _a === void 0 ? {} : _a, _b = props.fieldProps, fieldProps = _b === void 0 ? {} : _b;
-    var itemType = fieldProps.itemType, _c = fieldProps.addButtonText, addButtonText = _c === void 0 ? 'Add' : _c, addButtonProps = fieldProps.addButtonProps, addButton = fieldProps.addButton, removeButton = fieldProps.removeButton, removeButtonProps = fieldProps.removeButtonProps, _d = fieldProps.textFieldProps, textFieldProps = _d === void 0 ? {} : _d, _e = fieldProps.defaultData, defaultData = _e === void 0 ? {} : _e;
+    var itemType = fieldProps.itemType, _c = fieldProps.addButtonText, addButtonText = _c === void 0 ? 'Add' : _c, addButtonProps = fieldProps.addButtonProps, addButton = fieldProps.addButton, removeButton = fieldProps.removeButton, removeButtonProps = fieldProps.removeButtonProps, _d = fieldProps.textFieldProps, textFieldProps = _d === void 0 ? {} : _d, _e = fieldProps.defaultData, defaultData = _e === void 0 ? {} : _e, onRemove = fieldProps.onRemove;
     var values = get(formikProps, "values.".concat(fieldProps.name));
     var itemComponentConfig = getComponentConfig(itemType);
+    var handleRemove = function (arrayHelpers, index) {
+        arrayHelpers.remove(index);
+        onRemove === null || onRemove === void 0 ? void 0 : onRemove(arrayHelpers, index);
+    };
     return (React.createElement(FieldArray, { name: fieldProps.name, render: function (arrayHelpers) { return (React.createElement("div", null,
             (values || []).map(function (value, index) { return (React.createElement(Box, { key: "".concat(fieldProps.name, "-").concat(index), position: 'relative' },
                 React.cloneElement(itemComponentConfig.component, __assign(__assign({ name: fieldProps.name, itemIndex: index, arrayHelpers: arrayHelpers, fieldValue: value, formikProps: formikProps }, itemComponentConfig.props), textFieldProps)),
@@ -43,7 +47,7 @@ export var MUIFieldArray = memo(function (props) {
                         right: 0,
                         top: '50%',
                         transform: 'translate(0,-50%)'
-                    }, size: "small", onClick: function () { return arrayHelpers.remove(index); } }, removeButtonProps),
+                    }, size: "small", onClick: function () { return handleRemove(arrayHelpers, index); } }, removeButtonProps),
                     React.createElement(CloseIcon, null))))); }),
             React.createElement("div", null, (addButton) ? addButton : (React.createElement(Button, __assign({ type: "button", onClick: function () { return arrayHelpers.push(defaultData); } }, addButtonProps), addButtonText))))); } }));
 }, function (p, n) {
