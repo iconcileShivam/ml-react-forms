@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormikValues, FormikHelpers } from 'formik';
+import { FormikProps } from 'formik';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import { IFieldProps } from '../index';
 import { get, isEqual } from 'lodash';
@@ -8,11 +8,11 @@ import MUIReadOnly from './MUIReadOnly';
 
 export interface IProps extends IFieldProps {
     fieldProps?: TextFieldProps
-    onChange?: (event: React.ChangeEvent<any>, formikHelpers: FormikHelpers<any>) => void;
+    onChange?: (event: React.ChangeEvent<any>, formikProps: FormikProps<any>) => void;
 }
 
 export const MUITextField: React.FC<IProps> = React.memo((props) => {
-    const { fieldProps = {} as TextFieldProps, formikProps = {} as FormikValues, isReadOnly = false,onChange } = props;
+    const { fieldProps = {} as TextFieldProps, formikProps = {} as FormikProps<any>, isReadOnly = false,onChange } = props;
     const fieldError = getFieldError((fieldProps.name || ''), formikProps);
     const updatedProps = {
         ...fieldProps,
@@ -21,7 +21,7 @@ export const MUITextField: React.FC<IProps> = React.memo((props) => {
         // onChange: formikProps.handleChange,
         onChange: (event: React.ChangeEvent<any>) => {
             if (onChange) {
-                onChange(event, formikProps);
+                onChange(event, formikProps as FormikProps<any>);
             } else {
                 formikProps.handleChange(event);
             }

@@ -16,9 +16,18 @@ import { getFieldError } from '../Utils';
 import MUIReadOnly from './MUIReadOnly';
 export var MUITextField = React.memo(function (props) {
     var _a;
-    var _b = props.fieldProps, fieldProps = _b === void 0 ? {} : _b, _c = props.formikProps, formikProps = _c === void 0 ? {} : _c, _d = props.isReadOnly, isReadOnly = _d === void 0 ? false : _d;
+    var _b = props.fieldProps, fieldProps = _b === void 0 ? {} : _b, _c = props.formikProps, formikProps = _c === void 0 ? {} : _c, _d = props.isReadOnly, isReadOnly = _d === void 0 ? false : _d, onChange = props.onChange;
     var fieldError = getFieldError((fieldProps.name || ''), formikProps);
-    var updatedProps = __assign(__assign({}, fieldProps), { error: !!fieldError, helperText: fieldError || fieldProps.helperText || '', onChange: formikProps.handleChange, onBlur: formikProps.handleBlur, value: (_a = get(formikProps, "values.".concat(fieldProps.name))) !== null && _a !== void 0 ? _a : '' });
+    var updatedProps = __assign(__assign({}, fieldProps), { error: !!fieldError, helperText: fieldError || fieldProps.helperText || '', 
+        // onChange: formikProps.handleChange,
+        onChange: function (event) {
+            if (onChange) {
+                onChange(event, formikProps);
+            }
+            else {
+                formikProps.handleChange(event);
+            }
+        }, onBlur: formikProps.handleBlur, value: (_a = get(formikProps, "values.".concat(fieldProps.name))) !== null && _a !== void 0 ? _a : '' });
     if (isReadOnly) {
         return (React.createElement(MUIReadOnly, { label: updatedProps.label, value: updatedProps.value }));
     }
