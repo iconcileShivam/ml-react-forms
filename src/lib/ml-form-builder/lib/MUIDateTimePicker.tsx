@@ -5,6 +5,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { FormikValues } from 'formik';
 import { get } from 'lodash';
+import dayjs from 'dayjs';
+
 import { IFieldProps } from '..';
 import { DateTimePicker, DateTimePickerProps } from '@mui/x-date-pickers';
 
@@ -131,6 +133,4 @@ export const MUIDateTimePicker: React.FC<IFieldProps & { fieldProps?: IMUIDateTi
     )
 }
 
-function dayjs(value: string) {
-    throw new Error('Function not implemented.');
-}
+
