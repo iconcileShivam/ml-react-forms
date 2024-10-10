@@ -28,13 +28,14 @@ export const MUIDatePicker: React.FC<IFieldProps & { fieldProps?: IMUIDatePicker
         const dateValue = (outputFormat === 'date') ? date : date.format(outputFormat || fieldProps.format || 'MM/DD/YYYY');
         formikProps.setFieldValue(fieldProps.name, dateValue, false);
     };
+    //  (!value) ? null : value,
     const updatedProps = {
         ...datePickerProps,
         error: !!fieldError,
         helperText: (fieldError || ''),
         onChange: handleDateChange,
-        value: (!value) ? null : value,
-        inputValue: (!value) ? '' : value,
+        value: (!value) ? null : (typeof value === 'string') ? dayjs(value) : value,
+        inputValue: (!value) ? '' : (typeof value === 'string') ? dayjs(value) : value,
         format: fieldProps.format || 'MM/DD/YYYY',
 
         onError: (error: React.ReactNode) => {
@@ -128,4 +129,8 @@ export const MUIDateTimePicker: React.FC<IFieldProps & { fieldProps?: IMUIDateTi
             <DateTimePicker {...updatedProps} />
         </LocalizationProvider>
     )
+}
+
+function dayjs(value: string) {
+    throw new Error('Function not implemented.');
 }
