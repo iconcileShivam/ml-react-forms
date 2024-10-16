@@ -25,7 +25,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { get } from 'lodash';
+import { get, set } from 'lodash';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 export var MUIDatePicker = function (props) {
@@ -44,12 +44,14 @@ export var MUIDatePicker = function (props) {
         formikProps.setFieldValue(fieldProps.name, dateValue, false);
     };
     //  (!value) ? null : value,
-    var updatedProps = __assign(__assign({}, datePickerProps), { error: !!fieldError, helperText: (fieldError || ''), onChange: handleDateChange, value: (!value) ? null : (typeof value === 'string') ? dayjs(value) : value, inputValue: (!value) ? '' : (typeof value === 'string') ? dayjs(value) : value, format: fieldProps.format || 'MM/DD/YYYY', onError: function (error) {
+    var updatedProps = __assign(__assign({}, datePickerProps), { onChange: handleDateChange, value: (!value) ? null : (typeof value === 'string') ? dayjs(value) : value, inputValue: (!value) ? '' : (typeof value === 'string') ? dayjs(value) : value, format: fieldProps.format || 'MM/DD/YYYY', onError: function (error) {
             // handle as a side effect
             if (error !== fieldError) {
                 formikProps.setFieldError(fieldProps.name, error);
             }
         } });
+    set(updatedProps, 'slotProps.textField.error', !!fieldError);
+    set(updatedProps, 'slotProps.textField.helperText', !!(fieldError || ''));
     return (React.createElement(LocalizationProvider, { dateAdapter: AdapterDayjs },
         React.createElement(DatePicker, __assign({}, updatedProps))));
 };

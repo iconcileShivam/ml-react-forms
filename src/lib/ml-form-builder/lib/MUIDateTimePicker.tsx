@@ -4,7 +4,7 @@ import { TimePicker, TimePickerProps } from '@mui/x-date-pickers/TimePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { FormikValues } from 'formik';
-import { get } from 'lodash';
+import { get, set } from 'lodash';
 
 import { IFieldProps } from '..';
 import { DateTimePicker, DateTimePickerProps } from '@mui/x-date-pickers';
@@ -33,8 +33,6 @@ export const MUIDatePicker: React.FC<IFieldProps & { fieldProps?: IMUIDatePicker
     //  (!value) ? null : value,
     const updatedProps = {
         ...datePickerProps,
-        error: !!fieldError,
-        helperText: (fieldError || ''),
         onChange: handleDateChange,
         value: (!value) ? null : (typeof value === 'string') ? dayjs(value) : value,
         inputValue: (!value) ? '' : (typeof value === 'string') ? dayjs(value) : value,
@@ -47,6 +45,9 @@ export const MUIDatePicker: React.FC<IFieldProps & { fieldProps?: IMUIDatePicker
             }
         }
     };
+
+    set(updatedProps, 'slotProps.textField.error', !!fieldError)
+    set(updatedProps, 'slotProps.textField.helperText', !!(fieldError || ''))
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
