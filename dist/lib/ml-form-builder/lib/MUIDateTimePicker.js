@@ -28,11 +28,12 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { get, set } from 'lodash';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
+import { getFieldError } from '../Utils';
 export var MUIDatePicker = function (props) {
     var _a = props.fieldProps, fieldProps = _a === void 0 ? {} : _a, _b = props.formikProps, formikProps = _b === void 0 ? {} : _b;
     var value = get(formikProps, "values.".concat(fieldProps.name));
     //const [selectedDate, setSelectedDate] = React.useState<MaterialUiPickersDate | null>(initValue ? initValue : null);
-    var fieldError = get(formikProps, "errors.".concat(fieldProps.name));
+    var fieldError = getFieldError(fieldProps.name || '', formikProps);
     var outputFormat = fieldProps.outputFormat, datePickerProps = __rest(fieldProps, ["outputFormat"]);
     var handleDateChange = function (date) {
         //setSelectedDate(date);

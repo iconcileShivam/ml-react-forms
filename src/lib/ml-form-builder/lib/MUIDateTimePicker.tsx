@@ -9,6 +9,7 @@ import { get, set } from 'lodash';
 import { IFieldProps } from '..';
 import { DateTimePicker, DateTimePickerProps } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
+import { getFieldError } from '../Utils';
 
 export interface IMUIDatePickerProps extends DatePickerProps<any> {
     outputFormat?: string
@@ -19,7 +20,7 @@ export const MUIDatePicker: React.FC<IFieldProps & { fieldProps?: IMUIDatePicker
     const { fieldProps = {} as IMUIDatePickerProps, formikProps = {} as FormikValues } = props;
     const value = get(formikProps, `values.${fieldProps.name}`);
     //const [selectedDate, setSelectedDate] = React.useState<MaterialUiPickersDate | null>(initValue ? initValue : null);
-    const fieldError = get(formikProps, `errors.${fieldProps.name}`);
+    const fieldError = getFieldError(fieldProps.name || '', formikProps);
     const { outputFormat, ...datePickerProps } = fieldProps;
     const handleDateChange = (date: any | null) => {
         //setSelectedDate(date);
