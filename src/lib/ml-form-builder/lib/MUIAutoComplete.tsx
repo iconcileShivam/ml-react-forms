@@ -219,7 +219,6 @@ export const MUIAutocomplete = React.memo(function MUIAutocomplete<T>(props: IPr
         id={fieldConfig.valueKey}
         disableClearable={clearOnSelect}
         value={transformValues ? transformValues(value) : value}
-        onBlur={formikProps.handleBlur}
         renderInput={
             (params:any) => <TextField
                 {...params}
@@ -230,6 +229,7 @@ export const MUIAutocomplete = React.memo(function MUIAutocomplete<T>(props: IPr
                 fullWidth
                 error={error}
                 helperText={fieldError}
+                onBlur={formikProps.handleBlur}
                 {...renderInputProps}
                 InputProps={{
                     ...params.InputProps,
