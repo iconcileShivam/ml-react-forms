@@ -3,7 +3,7 @@ import { DatePicker, DatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker, TimePickerProps } from '@mui/x-date-pickers/TimePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { FormikValues } from 'formik';
+import { FormikProps } from 'formik';
 import { get, set } from 'lodash';
 
 import { IFieldProps } from '..';
@@ -17,7 +17,7 @@ export interface IMUIDatePickerProps extends DatePickerProps<any> {
 }
 
 export const MUIDatePicker: React.FC<IFieldProps & { fieldProps?: IMUIDatePickerProps }> = (props) => {
-    const { fieldProps = {} as IMUIDatePickerProps, formikProps = {} as FormikValues } = props;
+    const { fieldProps = {} as IMUIDatePickerProps, formikProps = {} as FormikProps<any> } = props;
     const value = get(formikProps, `values.${fieldProps.name}`);
     //const [selectedDate, setSelectedDate] = React.useState<MaterialUiPickersDate | null>(initValue ? initValue : null);
     const fieldError = getFieldError(fieldProps.name || '', formikProps);
@@ -38,7 +38,7 @@ export const MUIDatePicker: React.FC<IFieldProps & { fieldProps?: IMUIDatePicker
         value: (!value) ? null : (typeof value === 'string') ? dayjs(value) : value,
         inputValue: (!value) ? '' : (typeof value === 'string') ? dayjs(value) : value,
         format: fieldProps.format || 'MM/DD/YYYY',
-
+        onblur: formikProps.handleBlur,
         onError: (error: React.ReactNode) => {
             // handle as a side effect
             if (error !== fieldError) {
@@ -62,7 +62,7 @@ export interface IMUITimePickerProps extends TimePickerProps<any> {
 }
 
 export const MUITimePicker: React.FC<IFieldProps & { fieldProps?: IMUITimePickerProps }> = props => {
-    const { fieldProps = {} as IMUITimePickerProps, formikProps = {} as FormikValues } = props;
+    const { fieldProps = {} as IMUITimePickerProps, formikProps = {} as FormikProps<any> } = props;
     const fieldError = get(formikProps, `errors.${fieldProps.name}`);
     const value = get(formikProps, `values.${fieldProps.name}`);
     const handleTimeChange = (time: any | null) => {
@@ -83,6 +83,7 @@ export const MUITimePicker: React.FC<IFieldProps & { fieldProps?: IMUITimePicker
                 formikProps.setFieldError(fieldProps.name, error);
             }
         },
+        onblur: formikProps.handleBlur,
     };
     return (
         <TimePicker  {...updatedProps} />
@@ -96,7 +97,7 @@ export interface IMUIDateTimePickerProps extends DateTimePickerProps<any> {
 
 
 export const MUIDateTimePicker: React.FC<IFieldProps & { fieldProps?: IMUIDateTimePickerProps }> = props => {
-    const { fieldProps = {} as IMUIDateTimePickerProps, formikProps = {} as FormikValues } = props;
+    const { fieldProps = {} as IMUIDateTimePickerProps, formikProps = {} as FormikProps<any> } = props;
     const value = get(formikProps, `values.${fieldProps.name}`);
     //const [selectedDate, setSelectedDate] = React.useState<MaterialUiPickersDate | null>(initValue ? initValue : null);
     const fieldError = get(formikProps, `errors.${fieldProps.name}`);
@@ -125,7 +126,8 @@ export const MUIDateTimePicker: React.FC<IFieldProps & { fieldProps?: IMUIDateTi
             if (error !== fieldError) {
                 formikProps.setFieldError(fieldProps.name, error);
             }
-        }
+        },
+        onblur: formikProps.handleBlur,
     };
 
     return (

@@ -1,6 +1,6 @@
 import { CircularProgress, InputBaseComponentProps, TextField } from '@mui/material';
 import Autocomplete, { AutocompleteProps, AutocompleteRenderInputParams, AutocompleteRenderOptionState } from '@mui/material/Autocomplete';
-import { FormikValues } from 'formik';
+import { FormikProps } from 'formik';
 import { filter, findIndex, get, isEqual, isString, reduce } from 'lodash';
 import * as React from 'react';
 import Highlighter from "react-highlight-words";
@@ -42,7 +42,7 @@ export interface IProps<T> extends IFieldProps {
 export const MUIAutocomplete = React.memo(function MUIAutocomplete<T>(props: IProps<T>) {
     const [query, setQuery] = React.useState<string>();
     const ref = React.useRef<HTMLDivElement | null>(null);
-    const { fieldProps = {} as IMUIAutoCompleteProps<T>, formikProps = {} as FormikValues, fieldConfig = {} as FormConfig } = props
+    const { fieldProps = {} as IMUIAutoCompleteProps<T>, formikProps = {} as FormikProps<any>, fieldConfig = {} as FormConfig } = props
     const fieldError = getFieldError((fieldConfig.valueKey || ''), formikProps);
     const error = !!fieldError;
     const {
@@ -219,6 +219,7 @@ export const MUIAutocomplete = React.memo(function MUIAutocomplete<T>(props: IPr
         id={fieldConfig.valueKey}
         disableClearable={clearOnSelect}
         value={transformValues ? transformValues(value) : value}
+        onBlur={formikProps.handleBlur}
         renderInput={
             (params:any) => <TextField
                 {...params}

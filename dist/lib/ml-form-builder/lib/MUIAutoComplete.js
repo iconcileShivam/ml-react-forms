@@ -241,7 +241,7 @@ export var MUIAutocomplete = React.memo(function MUIAutocomplete(props) {
         // @ts-ignore
         onChange: onItemSelect, onInputChange: onInputChange, getOptionLabel: getOptionLabel, onOpen: function () { setOpen(true); }, open: open, onClose: function () { setOpen(false); }, options: options.length > 0 ? options : defaultOptions, isOptionEqualToValue: idKey ? function (option, value) { return option[idKey] === value[idKey]; } : undefined, 
         // @ts-ignore
-        renderOption: defaultRenderOptions, id: fieldConfig.valueKey, disableClearable: clearOnSelect, value: transformValues ? transformValues(value) : value, renderInput: function (params) { return React.createElement(TextField, __assign({}, params, { value: query, ref: ref, onChange: function (e) { return handleChange(e.target.value); }, 
+        renderOption: defaultRenderOptions, id: fieldConfig.valueKey, disableClearable: clearOnSelect, value: transformValues ? transformValues(value) : value, onBlur: formikProps.handleBlur, renderInput: function (params) { return React.createElement(TextField, __assign({}, params, { value: query, ref: ref, onChange: function (e) { return handleChange(e.target.value); }, 
             // @ts-ignore
             fullWidth: true, error: error, helperText: fieldError }, renderInputProps, { InputProps: __assign(__assign(__assign({}, params.InputProps), { 
                 // @ts-ignore
