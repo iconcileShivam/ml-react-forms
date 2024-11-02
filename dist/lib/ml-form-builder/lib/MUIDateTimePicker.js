@@ -52,7 +52,7 @@ export var MUIDatePicker = function (props) {
             }
         } });
     set(updatedProps, 'slotProps.textField.error', !!fieldError);
-    set(updatedProps, 'slotProps.textField.name', !!fieldProps.name);
+    set(updatedProps, 'slotProps.textField.name', fieldProps.name);
     set(updatedProps, 'slotProps.textField.helperText', !!(fieldError || ''));
     set(updatedProps, 'slotProps.textField.onBlur', formikProps.handleBlur);
     return (React.createElement(LocalizationProvider, { dateAdapter: AdapterDayjs },
@@ -74,7 +74,7 @@ export var MUITimePicker = function (props) {
             }
         } });
     set(updatedProps, 'slotProps.textField.error', !!fieldError);
-    set(updatedProps, 'slotProps.textField.name', !!fieldProps.name);
+    set(updatedProps, 'slotProps.textField.name', fieldProps.name);
     set(updatedProps, 'slotProps.textField.helperText', !!(fieldError || ''));
     set(updatedProps, 'slotProps.textField.onBlur', formikProps.handleBlur);
     return (React.createElement(TimePicker, __assign({}, updatedProps)));
@@ -102,7 +102,7 @@ export var MUIDateTimePicker = function (props) {
             }
         } });
     set(updatedProps, 'slotProps.textField.error', !!fieldError);
-    set(updatedProps, 'slotProps.textField.name', !!fieldProps.name);
+    set(updatedProps, 'slotProps.textField.name', fieldProps.name);
     set(updatedProps, 'slotProps.textField.helperText', !!(fieldError || ''));
     set(updatedProps, 'slotProps.textField.onBlur', formikProps.handleBlur);
     return (React.createElement(LocalizationProvider, { dateAdapter: AdapterDayjs },

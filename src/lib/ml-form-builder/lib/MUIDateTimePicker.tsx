@@ -47,7 +47,7 @@ export const MUIDatePicker: React.FC<IFieldProps & { fieldProps?: IMUIDatePicker
     };
 
     set(updatedProps, 'slotProps.textField.error', !!fieldError)
-    set(updatedProps, 'slotProps.textField.name', !!fieldProps.name)
+    set(updatedProps, 'slotProps.textField.name', fieldProps.name)
     set(updatedProps, 'slotProps.textField.helperText', !!(fieldError || ''))
     set(updatedProps, 'slotProps.textField.onBlur', formikProps.handleBlur)
 
@@ -87,7 +87,7 @@ export const MUITimePicker: React.FC<IFieldProps & { fieldProps?: IMUITimePicker
     };
 
     set(updatedProps, 'slotProps.textField.error', !!fieldError)
-    set(updatedProps, 'slotProps.textField.name', !!fieldProps.name)
+    set(updatedProps, 'slotProps.textField.name', fieldProps.name)
     set(updatedProps, 'slotProps.textField.helperText', !!(fieldError || ''))
     set(updatedProps, 'slotProps.textField.onBlur', formikProps.handleBlur)
 
@@ -136,7 +136,7 @@ export const MUIDateTimePicker: React.FC<IFieldProps & { fieldProps?: IMUIDateTi
     };
 
     set(updatedProps, 'slotProps.textField.error', !!fieldError)
-    set(updatedProps, 'slotProps.textField.name', !!fieldProps.name)
+    set(updatedProps, 'slotProps.textField.name', fieldProps.name)
     set(updatedProps, 'slotProps.textField.helperText', !!(fieldError || ''))
     set(updatedProps, 'slotProps.textField.onBlur', formikProps.handleBlur)
 
