@@ -38,7 +38,6 @@ export const MUIDatePicker: React.FC<IFieldProps & { fieldProps?: IMUIDatePicker
         value: (!value) ? null : (typeof value === 'string') ? dayjs(value) : value,
         inputValue: (!value) ? '' : (typeof value === 'string') ? dayjs(value) : value,
         format: fieldProps.format || 'MM/DD/YYYY',
-        onBlur: formikProps.handleBlur,
         onError: (error: React.ReactNode) => {
             // handle as a side effect
             if (error !== fieldError) {
@@ -48,7 +47,9 @@ export const MUIDatePicker: React.FC<IFieldProps & { fieldProps?: IMUIDatePicker
     };
 
     set(updatedProps, 'slotProps.textField.error', !!fieldError)
+    set(updatedProps, 'slotProps.textField.name', !!fieldProps.name)
     set(updatedProps, 'slotProps.textField.helperText', !!(fieldError || ''))
+    set(updatedProps, 'slotProps.textField.onBlur', formikProps.handleBlur)
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -83,8 +84,13 @@ export const MUITimePicker: React.FC<IFieldProps & { fieldProps?: IMUITimePicker
                 formikProps.setFieldError(fieldProps.name, error);
             }
         },
-        onBlur: formikProps.handleBlur,
     };
+
+    set(updatedProps, 'slotProps.textField.error', !!fieldError)
+    set(updatedProps, 'slotProps.textField.name', !!fieldProps.name)
+    set(updatedProps, 'slotProps.textField.helperText', !!(fieldError || ''))
+    set(updatedProps, 'slotProps.textField.onBlur', formikProps.handleBlur)
+
     return (
         <TimePicker  {...updatedProps} />
     )
@@ -127,8 +133,12 @@ export const MUIDateTimePicker: React.FC<IFieldProps & { fieldProps?: IMUIDateTi
                 formikProps.setFieldError(fieldProps.name, error);
             }
         },
-        onBlur: formikProps.handleBlur,
     };
+
+    set(updatedProps, 'slotProps.textField.error', !!fieldError)
+    set(updatedProps, 'slotProps.textField.name', !!fieldProps.name)
+    set(updatedProps, 'slotProps.textField.helperText', !!(fieldError || ''))
+    set(updatedProps, 'slotProps.textField.onBlur', formikProps.handleBlur)
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
