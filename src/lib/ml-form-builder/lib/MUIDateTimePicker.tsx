@@ -38,7 +38,7 @@ export const MUIDatePicker: React.FC<IFieldProps & { fieldProps?: IMUIDatePicker
         value: (!value) ? null : (typeof value === 'string') ? dayjs(value) : value,
         inputValue: (!value) ? '' : (typeof value === 'string') ? dayjs(value) : value,
         format: fieldProps.format || 'MM/DD/YYYY',
-        onblur: formikProps.handleBlur,
+        onBlur: formikProps.handleBlur,
         onError: (error: React.ReactNode) => {
             // handle as a side effect
             if (error !== fieldError) {
@@ -83,7 +83,7 @@ export const MUITimePicker: React.FC<IFieldProps & { fieldProps?: IMUITimePicker
                 formikProps.setFieldError(fieldProps.name, error);
             }
         },
-        onblur: formikProps.handleBlur,
+        onBlur: formikProps.handleBlur,
     };
     return (
         <TimePicker  {...updatedProps} />
@@ -127,7 +127,7 @@ export const MUIDateTimePicker: React.FC<IFieldProps & { fieldProps?: IMUIDateTi
                 formikProps.setFieldError(fieldProps.name, error);
             }
         },
-        onblur: formikProps.handleBlur,
+        onBlur: formikProps.handleBlur,
     };
 
     return (

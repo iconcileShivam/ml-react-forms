@@ -229,6 +229,7 @@ export const MUIAutocomplete = React.memo(function MUIAutocomplete<T>(props: IPr
                 fullWidth
                 error={error}
                 helperText={fieldError}
+                name={fieldConfig.valueKey}
                 onBlur={formikProps.handleBlur}
                 {...renderInputProps}
                 InputProps={{
