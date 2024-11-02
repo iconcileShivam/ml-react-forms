@@ -243,7 +243,7 @@ export var MUIAutocomplete = React.memo(function MUIAutocomplete(props) {
         // @ts-ignore
         renderOption: defaultRenderOptions, id: fieldConfig.valueKey, disableClearable: clearOnSelect, value: transformValues ? transformValues(value) : value, renderInput: function (params) { return React.createElement(TextField, __assign({}, params, { value: query, ref: ref, onChange: function (e) { return handleChange(e.target.value); }, 
             // @ts-ignore
-            fullWidth: true, error: error, helperText: fieldError, onBlur: formikProps.handleBlur }, renderInputProps, { InputProps: __assign(__assign(__assign({}, params.InputProps), { 
+            fullWidth: true, error: error, helperText: fieldError, name: fieldConfig.valueKey, onBlur: formikProps.handleBlur }, renderInputProps, { InputProps: __assign(__assign(__assign({}, params.InputProps), { 
                 // @ts-ignore
                 endAdornment: (React.createElement(React.Fragment, null,
                     loading ? React.createElement(CircularProgress, { color: "primary", size: 20 }) : null,
