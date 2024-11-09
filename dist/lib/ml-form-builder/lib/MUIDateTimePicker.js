@@ -38,11 +38,11 @@ export var MUIDatePicker = function (props) {
     var handleDateChange = function (date) {
         //setSelectedDate(date);
         if (!date) {
-            formikProps.setFieldValue(fieldProps.name, date, false);
+            formikProps.setFieldValue(fieldProps.name, date);
             return;
         }
         var dateValue = (outputFormat === 'date') ? date : date.format(outputFormat || fieldProps.format || 'MM/DD/YYYY');
-        formikProps.setFieldValue(fieldProps.name, dateValue, false);
+        formikProps.setFieldValue(fieldProps.name, dateValue);
     };
     //  (!value) ? null : value,
     var updatedProps = __assign(__assign({}, datePickerProps), { onChange: handleDateChange, value: (!value) ? null : (typeof value === 'string') ? dayjs(value) : value, inputValue: (!value) ? '' : (typeof value === 'string') ? dayjs(value) : value, format: fieldProps.format || 'MM/DD/YYYY', onError: function (error) {
@@ -53,7 +53,7 @@ export var MUIDatePicker = function (props) {
         } });
     set(updatedProps, 'slotProps.textField.error', !!fieldError);
     set(updatedProps, 'slotProps.textField.name', fieldProps.name);
-    set(updatedProps, 'slotProps.textField.helperText', !!(fieldError || ''));
+    set(updatedProps, 'slotProps.textField.helperText', fieldError || '');
     set(updatedProps, 'slotProps.textField.onBlur', formikProps.handleBlur);
     return (React.createElement(LocalizationProvider, { dateAdapter: AdapterDayjs },
         React.createElement(DatePicker, __assign({}, updatedProps))));
@@ -64,9 +64,9 @@ export var MUITimePicker = function (props) {
     var value = get(formikProps, "values.".concat(fieldProps.name));
     var handleTimeChange = function (time) {
         if (time === null)
-            formikProps.setFieldValue(fieldProps.name, time, false);
+            formikProps.setFieldValue(fieldProps.name, time);
         else
-            formikProps.setFieldValue(fieldProps.name, new Date(time).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }), false);
+            formikProps.setFieldValue(fieldProps.name, new Date(time).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }));
     };
     var updatedProps = __assign(__assign({}, fieldProps), { error: !!fieldError, helperText: (fieldError || ''), onChange: handleTimeChange, value: (!value) ? null : undefined, inputValue: (!value) ? '' : value, onError: function (error) {
             if (error !== fieldError) {
@@ -75,7 +75,7 @@ export var MUITimePicker = function (props) {
         } });
     set(updatedProps, 'slotProps.textField.error', !!fieldError);
     set(updatedProps, 'slotProps.textField.name', fieldProps.name);
-    set(updatedProps, 'slotProps.textField.helperText', !!(fieldError || ''));
+    set(updatedProps, 'slotProps.textField.helperText', fieldError || '');
     set(updatedProps, 'slotProps.textField.onBlur', formikProps.handleBlur);
     return (React.createElement(TimePicker, __assign({}, updatedProps)));
 };
@@ -89,11 +89,11 @@ export var MUIDateTimePicker = function (props) {
     var handleDateChange = function (datetime) {
         //setSelectedDate(date);
         if (!datetime) {
-            formikProps.setFieldValue(fieldProps.name, datetime, false);
+            formikProps.setFieldValue(fieldProps.name, datetime);
             return;
         }
         var dateValue = (outputFormat === 'date') ? datetime : datetime.format(outputFormat || fieldProps.format || defaultFormat);
-        formikProps.setFieldValue(fieldProps.name, dateValue, false);
+        formikProps.setFieldValue(fieldProps.name, dateValue);
     };
     var updatedProps = __assign(__assign({}, datePickerProps), { error: !!fieldError, helperText: (fieldError || ''), onChange: handleDateChange, value: (!value) ? null : value, inputValue: (!value) ? '' : value, format: fieldProps.format || defaultFormat, onError: function (error) {
             // handle as a side effect
@@ -103,7 +103,7 @@ export var MUIDateTimePicker = function (props) {
         } });
     set(updatedProps, 'slotProps.textField.error', !!fieldError);
     set(updatedProps, 'slotProps.textField.name', fieldProps.name);
-    set(updatedProps, 'slotProps.textField.helperText', !!(fieldError || ''));
+    set(updatedProps, 'slotProps.textField.helperText', fieldError || '');
     set(updatedProps, 'slotProps.textField.onBlur', formikProps.handleBlur);
     return (React.createElement(LocalizationProvider, { dateAdapter: AdapterDayjs },
         React.createElement(DateTimePicker, __assign({}, updatedProps))));
