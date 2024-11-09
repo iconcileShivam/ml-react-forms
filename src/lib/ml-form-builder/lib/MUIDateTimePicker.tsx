@@ -25,11 +25,11 @@ export const MUIDatePicker: React.FC<IFieldProps & { fieldProps?: IMUIDatePicker
     const handleDateChange = (date: any | null) => {
         //setSelectedDate(date);
         if (!date) {
-            formikProps.setFieldValue(fieldProps.name, date, false);
+            formikProps.setFieldValue(fieldProps.name, date);
             return;
         }
         const dateValue = (outputFormat === 'date') ? date : date.format(outputFormat || fieldProps.format || 'MM/DD/YYYY');
-        formikProps.setFieldValue(fieldProps.name, dateValue, false);
+        formikProps.setFieldValue(fieldProps.name, dateValue);
     };
     //  (!value) ? null : value,
     const updatedProps = {
@@ -48,7 +48,7 @@ export const MUIDatePicker: React.FC<IFieldProps & { fieldProps?: IMUIDatePicker
 
     set(updatedProps, 'slotProps.textField.error', !!fieldError)
     set(updatedProps, 'slotProps.textField.name', fieldProps.name)
-    set(updatedProps, 'slotProps.textField.helperText', !!(fieldError || ''))
+    set(updatedProps, 'slotProps.textField.helperText', fieldError || '')
     set(updatedProps, 'slotProps.textField.onBlur', formikProps.handleBlur)
 
     return (
@@ -68,9 +68,9 @@ export const MUITimePicker: React.FC<IFieldProps & { fieldProps?: IMUITimePicker
     const value = get(formikProps, `values.${fieldProps.name}`);
     const handleTimeChange = (time: any | null) => {
         if (time === null)
-            formikProps.setFieldValue(fieldProps.name, time, false);
+            formikProps.setFieldValue(fieldProps.name, time);
         else
-            formikProps.setFieldValue(fieldProps.name, new Date(time).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }), false)
+            formikProps.setFieldValue(fieldProps.name, new Date(time).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }))
     }
     const updatedProps = {
         ...fieldProps,
@@ -112,11 +112,11 @@ export const MUIDateTimePicker: React.FC<IFieldProps & { fieldProps?: IMUIDateTi
     const handleDateChange = (datetime: any | null) => {
         //setSelectedDate(date);
         if (!datetime) {
-            formikProps.setFieldValue(fieldProps.name, datetime, false);
+            formikProps.setFieldValue(fieldProps.name, datetime);
             return;
         }
         const dateValue = (outputFormat === 'date') ? datetime : datetime.format(outputFormat || fieldProps.format || defaultFormat);
-        formikProps.setFieldValue(fieldProps.name, dateValue, false);
+        formikProps.setFieldValue(fieldProps.name, dateValue);
     };
     const updatedProps = {
         ...datePickerProps,
