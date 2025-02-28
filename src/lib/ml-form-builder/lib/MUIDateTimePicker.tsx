@@ -77,8 +77,8 @@ export const MUITimePicker: React.FC<IFieldProps & { fieldProps?: IMUITimePicker
         error: !!fieldError,
         helperText: (fieldError || ''),
         onChange: handleTimeChange,
-        value: (!value) ? null : undefined,
-        inputValue: (!value) ? '' : value,
+        value: (!value) ? null : (typeof value === 'string') ? dayjs(value) : value,
+        inputValue: (!value) ? '' : (typeof value === 'string') ? dayjs(value) : value,
         onError: (error: React.ReactNode) => {
             if (error !== fieldError) {
                 formikProps.setFieldError(fieldProps.name, error);
