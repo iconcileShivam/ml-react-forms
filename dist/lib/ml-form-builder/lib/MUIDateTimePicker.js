@@ -1,5 +1,5 @@
 var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
+    __assign = Object.assign || function (t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
             s = arguments[i];
             for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
@@ -45,12 +45,14 @@ export var MUIDatePicker = function (props) {
         formikProps.setFieldValue(fieldProps.name, dateValue);
     };
     //  (!value) ? null : value,
-    var updatedProps = __assign(__assign({}, datePickerProps), { onChange: handleDateChange, value: (!value) ? null : (typeof value === 'string') ? dayjs(value) : value, inputValue: (!value) ? '' : (typeof value === 'string') ? dayjs(value) : value, format: fieldProps.format || 'MM/DD/YYYY', onError: function (error) {
+    var updatedProps = __assign(__assign({}, datePickerProps), {
+        onChange: handleDateChange, value: (!value) ? null : (typeof value === 'string') ? dayjs(value) : value, inputValue: (!value) ? '' : (typeof value === 'string') ? dayjs(value) : value, format: fieldProps.format || 'MM/DD/YYYY', onError: function (error) {
             // handle as a side effect
             if (error !== fieldError) {
                 formikProps.setFieldError(fieldProps.name, error);
             }
-        } });
+        }
+    });
     set(updatedProps, 'slotProps.textField.error', !!fieldError);
     set(updatedProps, 'slotProps.textField.name', fieldProps.name);
     set(updatedProps, 'slotProps.textField.helperText', fieldError || '');
@@ -68,11 +70,13 @@ export var MUITimePicker = function (props) {
         else
             formikProps.setFieldValue(fieldProps.name, new Date(time).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }));
     };
-    var updatedProps = __assign(__assign({}, fieldProps), { error: !!fieldError, helperText: (fieldError || ''), onChange: handleTimeChange, value: (!value) ? null : (typeof value === 'string') ? dayjs(value) : value, inputValue: (!value) ? '' : (typeof value === 'string') ? dayjs(value) : value, onError: function (error) {
+    var updatedProps = __assign(__assign({}, fieldProps), {
+        error: !!fieldError, helperText: (fieldError || ''), onChange: handleTimeChange, value: (!value) ? null : (typeof value === 'string') ? dayjs(value) : value, inputValue: (!value) ? '' : (typeof value === 'string') ? dayjs(value) : value, onError: function (error) {
             if (error !== fieldError) {
                 formikProps.setFieldError(fieldProps.name, error);
             }
-        } });
+        }
+    });
     set(updatedProps, 'slotProps.textField.error', !!fieldError);
     set(updatedProps, 'slotProps.textField.name', fieldProps.name);
     set(updatedProps, 'slotProps.textField.helperText', fieldError || '');
@@ -95,12 +99,19 @@ export var MUIDateTimePicker = function (props) {
         var dateValue = (outputFormat === 'date') ? datetime : datetime.format(outputFormat || fieldProps.format || defaultFormat);
         formikProps.setFieldValue(fieldProps.name, dateValue);
     };
-    var updatedProps = __assign(__assign({}, datePickerProps), { error: !!fieldError, helperText: (fieldError || ''), onChange: handleDateChange, value: (!value) ? null : value, inputValue: (!value) ? '' : value, format: fieldProps.format || defaultFormat, onError: function (error) {
+    var updatedProps = __assign(__assign({}, datePickerProps), {
+        error: !!fieldError, helperText: (fieldError || ''),
+        onChange: handleDateChange,
+        value: (!value) ? null : (typeof value === 'string') ? dayjs(value) : value,
+        inputValue: (!value) ? '' : (typeof value === 'string') ? dayjs(value) : value,
+        format: fieldProps.format || defaultFormat,
+        onError: function (error) {
             // handle as a side effect
             if (error !== fieldError) {
                 formikProps.setFieldError(fieldProps.name, error);
             }
-        } });
+        }
+    });
     set(updatedProps, 'slotProps.textField.error', !!fieldError);
     set(updatedProps, 'slotProps.textField.name', fieldProps.name);
     set(updatedProps, 'slotProps.textField.helperText', fieldError || '');
